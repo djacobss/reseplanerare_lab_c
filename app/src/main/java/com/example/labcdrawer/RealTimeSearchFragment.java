@@ -3,6 +3,7 @@ package com.example.labcdrawer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,10 @@ public class RealTimeSearchFragment extends Fragment {
     private static final String STATION_LIST = "stationList";
 
     private ArrayList<Integer> stationList;
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     public RealTimeSearchFragment() {
 
@@ -39,6 +44,8 @@ public class RealTimeSearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_real_time_search, container, false);
+        recyclerView = view.findViewById(R.id.realTimeSearchRecyclerView);
         return inflater.inflate(R.layout.fragment_real_time_search, container, false);
     }
 }
