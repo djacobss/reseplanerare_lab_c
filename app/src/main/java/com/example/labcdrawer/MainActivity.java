@@ -18,7 +18,7 @@ import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
-//hejtest
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
