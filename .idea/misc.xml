@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/drawable/billboard_border.xml" value="0.346875" />
+        <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/drawable/billboard_lines.xml" value="0.346875" />
+        <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.346875" />
+        <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/drawable/line_border_red.xml" value="0.5" />
+        <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/layout/activity_main.xml" value="0.490036231884058" />
+        <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/layout/billboard_item.xml" value="0.3307291666666667" />
+        <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/layout/fragment_real_time_bill_board.xml" value="0.490036231884058" />
+        <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/layout/fragment_real_time_favourite.xml" value="0.490036231884058" />
+        <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/layout/fragment_real_time_search.xml" value="0.490036231884058" />
+        <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/layout/fragment_trips_favourite.xml" value="0.490036231884058" />
+        <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/layout/fragment_trips_home.xml" value="0.490036231884058" />
+        <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/layout/fragment_trips_search.xml" value="0.490036231884058" />
+        <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/layout/nav_header.xml" value="0.490036231884058" />
+        <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/menu/drawer_menu.xml" value="0.5541666666666667" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

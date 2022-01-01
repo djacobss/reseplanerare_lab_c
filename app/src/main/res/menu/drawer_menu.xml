@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+    <item
+        android:id="@+id/nav_realTime"
+        android:title="Realtid">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_realTime_BillBoard"
+                    android:icon="@drawable/ic_clock"
+                    android:title="Avgångar" />
+                <item
+                    android:id="@+id/nav_realTime_Search"
+                    android:icon="@drawable/ic_baseline_search_24"
+                    android:title="Sök Hållplats" />
+                <item
+                    android:id="@+id/nav_realTime_Favourites"
+                    android:icon="@drawable/ic_baseline_star_half_24"
+                    android:title="Ändra Favorithållplatser" />
+            </group>
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/nav_trips"
+        android:title="Resor">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_trips_showFavs"
+                    android:icon="@drawable/ic_baseline_directions_bus_24"
+                    android:title="Favoritresor" />
+                <item
+                    android:id="@+id/nav_trips_search"
+                    android:icon="@drawable/ic_baseline_search_24"
+                    android:title="Sök Resa" />
+                <item
+                    android:id="@+id/nav_trips_Favourites"
+                    android:icon="@drawable/ic_baseline_star_half_24"
+                    android:title="Ändra Favoritresor" />
+            </group>
+        </menu>
+    </item>
+
+
+</menu>
