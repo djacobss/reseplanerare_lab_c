@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         model = new Model();
         AppData appData = new AppData();
         model.setAppData(appData);
+        model.setMainActivity(this);
 
         if(savedInstanceState == null){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new RealTimeBillBoardFragment()).commit();
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_realTime_Search:
                 RealTimeSearchFragment realTimeSearchFragment = RealTimeSearchFragment.newInstance(model.getFavouriteStationsStrings());
+                realTimeSearchFragment.setModel(model);
                 FragmentManager fragmentManagerSearchRT = getSupportFragmentManager();
                 FragmentTransaction transactionSearchRT = fragmentManagerSearchRT.beginTransaction();
                 transactionSearchRT.replace(R.id.fragment_container, realTimeSearchFragment, "REALTIME_SEARCH_FRAGMENT").commit();
@@ -130,4 +132,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tripMenuItem.setTitle(tripString);
 
     }
+
 }

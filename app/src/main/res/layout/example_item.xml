@@ -15,8 +15,8 @@
 
         <TextView
             android:id="@+id/realTimeSearchCardViewText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:text="Line 1"
             android:textColor="@android:color/black"
             android:textSize="20dp"
@@ -26,9 +26,19 @@
             android:paddingLeft="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/realTimeSearchFavouriteImageView"/>
 
-
+        <ImageView
+            android:id="@+id/realTimeSearchFavouriteImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toEndOf="@id/realTimeSearchCardViewText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/ic_favourite_false"
+            android:paddingRight="20dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

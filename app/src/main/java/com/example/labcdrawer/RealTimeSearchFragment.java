@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -28,6 +30,8 @@ public class RealTimeSearchFragment extends Fragment {
     private View mainView;
     private EditText searchBar;
     private Button searchBtn;
+    private ImageView itemFavouriteBtn;
+    private Model model;
 
     public RealTimeSearchFragment() {
 
@@ -62,16 +66,18 @@ public class RealTimeSearchFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         searchBar = view.findViewById(R.id.realTimeSearchEditText);
         searchBtn = view.findViewById(R.id.realTimeSearchButton);
+        itemFavouriteBtn = view.findViewById(R.id.realTimeSearchFavouriteImageView);
+        model.setRealTimeSearchFragment(this);
         searchBar.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if(event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER){
                     //TODO
-                    if(searchBar.getText().length() == 0){
+                    if(searchBar.getText().toString().length() == 0){
                         searchBar.setError("Ingen text angiven");
                         return false;
                     } else {
-
+                        FetchStationData.getJSONStationData(searchBar.getText().toString(),model);
                         return true;
                     }
                 }
@@ -81,10 +87,10 @@ public class RealTimeSearchFragment extends Fragment {
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(searchBar.getText().length() == 0){
+                if(searchBar.getText().toString().length() == 0){
                     searchBar.setError("Ingen text angiven");
                 } else {
-
+                    FetchStationData.getJSONStationData(searchBar.getText().toString(),model);
                 }
             }
         });
@@ -93,5 +99,29 @@ public class RealTimeSearchFragment extends Fragment {
 
     public View getMainView() {
         return mainView;
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
+    public void searchTimeOutError(){
+        Toast.makeText(mainView.getContext(), "Ingen Anslutning",Toast.LENGTH_LONG);
+    }
+
+    public void wrongInputError(){
+        Toast.makeText(mainView.getContext(), "Inga Resultat",Toast.LENGTH_LONG);
+    }
+
+    public void showResults(ArrayList<SearchRecyclerItem> searchResultList) {
+        for (SearchRecyclerItem item : searchResultList) {
+            if(item.getFavourite()){
+
+            }
+        }
     }
 }

@@ -1,11 +1,18 @@
 package com.example.labcdrawer;
 
+import com.android.volley.NoConnectionError;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class Model {
 
     private AppData appData;
-
+    private MainActivity mainActivity;
+    private RealTimeSearchFragment realTimeSearchFragment;
 
     public Model() {
 
@@ -47,5 +54,47 @@ public class Model {
             }
         }
         return tripsEndList;
+    }
+
+    public void stationSearchDataReceived(JSONObject response) {
+        ArrayList<SearchRecyclerItem> searchResultList = ParseSearchStation.parseStationData(response);
+        for (SearchRecyclerItem searchItem : searchResultList) {
+            setSearchItemFavourite(searchItem);
+        }
+        realTimeSearchFragment.showResults(searchResultList);
+    }
+
+    public void errorInStationSearchResponse(VolleyError error) {
+        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+            realTimeSearchFragment.searchTimeOutError();
+        } else {
+            realTimeSearchFragment.wrongInputError();
+        }
+    }
+
+    public void setMainActivity(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
+    }
+
+    public MainActivity getMainActivity() {
+        return mainActivity;
+    }
+
+    public void setRealTimeSearchFragment(RealTimeSearchFragment realTimeSearchFragment) {
+        this.realTimeSearchFragment = realTimeSearchFragment;
+    }
+
+    public RealTimeSearchFragment getRealTimeSearchFragment() {
+        return realTimeSearchFragment;
+    }
+
+    public void setSearchItemFavourite(SearchRecyclerItem item) {
+        for (Station s : appData.getFavouriteStations()) {
+            if (s.getSiteID() == item.getSiteID()) {
+                item.setFavourite(true);
+            } else {
+                item.setFavourite(false);
+            }
+        }
     }
 }
