@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void assignViews() {
 
         toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Reseplanerare");
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
