@@ -12,38 +12,48 @@ import java.util.ArrayList;
 
 public class RecycleSearchAdapter extends RecyclerView.Adapter<RecycleSearchAdapter.RecycleAdapterViewHolder> {
 
-    public ArrayList<SearchRecyclerItem> mItemListArray;
+    private ArrayList<SearchRecyclerItem> itemArrayList;
 
     public static class RecycleAdapterViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView searchResultImageView;
+        private TextView searchResultTextView;
 
         public RecycleAdapterViewHolder(View itemView){
             super(itemView);
-            searchResultImageView = itemView.findViewById(R.id.realTimeSearchCardViewText);
+            searchResultTextView = itemView.findViewById(R.id.realTimeSearchCardViewText);
+        }
+
+        public TextView getSearchResultTextView(){
+            return searchResultTextView;
         }
 
     }
 
     public RecycleSearchAdapter(ArrayList<SearchRecyclerItem> itemArrayList){
-
+        this.itemArrayList = itemArrayList;
     }
 
     @NonNull
     @Override
     public RecycleAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.example_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(viewType,parent,false);
         RecycleAdapterViewHolder recycleAdapterViewHolder = new RecycleAdapterViewHolder(view);
         return recycleAdapterViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecycleAdapterViewHolder holder, int position) {
-
+        SearchRecyclerItem currentItem = itemArrayList.get(position);
+        holder.getSearchResultTextView().setText(currentItem.getPlaceName());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return itemArrayList.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return R.layout.example_item;
     }
 }
