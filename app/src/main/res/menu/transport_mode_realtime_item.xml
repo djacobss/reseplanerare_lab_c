@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/transportModeItem"
+        android:title="Transportsätt"
+        android:icon="@drawable/ic_transportmode"
+        app:showAsAction="withText">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/transportModeBusItem"
+                    android:title="Buss"/>
+                <item
+                    android:id="@+id/transportModeMetroItem"
+                    android:title="Tunnelbana"/>
+                <item
+                    android:id="@+id/transportModeTrainItem"
+                    android:title="Tåg"/>
+                <item
+                    android:id="@+id/transportModeTramItem"
+                    android:title="Spårvagn"/>
+                <item
+                    android:id="@+id/transportModeShipItem"
+                    android:title="Färja"/>
+            </group>
+
+        </menu>
+
+
+    </item>
+
+
+</menu>

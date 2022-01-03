@@ -8,9 +8,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ParseSearchStation {
+public class SearchStationParser {
 
-    public static ArrayList<LocationItem> parseStationData(JSONObject response){
+    public static ArrayList<LocationItem> parseStationData(JSONObject response) {
         ArrayList<LocationItem> locationItems = new ArrayList<>();
         try {
             JSONArray responseData = response.getJSONArray("ResponseData");
@@ -22,7 +22,7 @@ public class ParseSearchStation {
                 locationItems.add(newItem);
             }
         } catch (JSONException e) {
-            Log.e("Parsing Error","Couldnt find Response Data");
+            Log.e("Parsing Error", "Couldnt find Response Data");
             e.printStackTrace();
         }
         return locationItems;

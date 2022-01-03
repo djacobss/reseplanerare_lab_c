@@ -1,20 +1,18 @@
 package com.example.labcdrawer;
 
-import android.util.Log;
-
 import com.android.volley.NoConnectionError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 
 import org.json.JSONObject;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Model {
 
     private AppData appData;
-    private MainActivity mainActivity;
-    private RealTimeSearchFragment realTimeSearchFragment;
 
     public Model() {
         appData = new AppData();
@@ -59,7 +57,7 @@ public class Model {
     }
 
     public void stationSearchDataReceived(JSONObject response) {
-        ArrayList<LocationItem> searchResultList = ParseSearchStation.parseStationData(response);
+        ArrayList<LocationItem> searchResultList = SearchStationParser.parseStationData(response);
         int index = 0;
         for (LocationItem searchItem : searchResultList) {
             if (setSearchItemFavourite(searchItem)) {
@@ -69,31 +67,31 @@ public class Model {
             }
             index++;
         }
-        realTimeSearchFragment.showResults(searchResultList);
+        appData.getRealTimeSearchFragment().showResults(searchResultList);
     }
 
     public void errorInStationSearchResponse(VolleyError error) {
         if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-            realTimeSearchFragment.searchTimeOutError();
+            appData.getRealTimeSearchFragment().searchTimeOutError();
         } else {
-            realTimeSearchFragment.wrongInputError();
+            appData.getRealTimeSearchFragment().wrongInputError();
         }
     }
 
     public void setMainActivity(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
+        appData.setMainActivity(mainActivity);
     }
 
     public MainActivity getMainActivity() {
-        return mainActivity;
+        return appData.getMainActivity();
     }
 
     public void setRealTimeSearchFragment(RealTimeSearchFragment realTimeSearchFragment) {
-        this.realTimeSearchFragment = realTimeSearchFragment;
+        appData.setRealTimeSearchFragment(realTimeSearchFragment);
     }
 
     public RealTimeSearchFragment getRealTimeSearchFragment() {
-        return realTimeSearchFragment;
+        return appData.getRealTimeSearchFragment();
     }
 
     public boolean setSearchItemFavourite(LocationItem item) {
@@ -116,5 +114,24 @@ public class Model {
 
     public boolean removeFavouriteStation(LocationItem station) {
         return appData.removeFavouriteStation(station);
+    }
+
+    public void realTimeDataReceived(JSONObject response) {
+        RealTimeParser realTimeParser = new RealTimeParser();
+        ArrayList<RealTimeItem> tempList = realTimeParser.parseRealTimeData(response,this);
+        appData.getStationRealTimeActivity().showResults(tempList);
+    }
+
+    public void errorInRealTimeResponse(VolleyError error) {
+    }
+
+    public void setLastUpdatedRealTime(String latestUpdate) {
+        latestUpdate = latestUpdate.substring(0,Math.min(latestUpdate.length(),16));
+        latestUpdate.replace("T"," Kl.");
+        appData.setLastUpdatedRealTime(latestUpdate);
+    }
+
+    public String getLastUpdatedRealTime(){
+        return appData.getLastUpdatedRealTime();
     }
 }

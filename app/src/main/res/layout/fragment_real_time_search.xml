@@ -13,14 +13,14 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/realTimeSearchRecyclerView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingRight="10dp"
-        android:paddingBottom="5dp">
+        android:paddingBottom="5dp"
+        app:layout_constraintBottom_toTopOf="@id/realTimeSearchRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/realTimeSearchEditText"
@@ -29,18 +29,18 @@
             android:layout_weight="0.8"
             android:background="@android:color/white"
             android:hint="Ange Hållplats"
-            android:paddingLeft="10dp"/>
+            android:paddingLeft="10dp" />
 
         <Button
             android:id="@+id/realTimeSearchButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="#7597F5"
             android:layout_marginLeft="10dp"
+            android:background="#7597F5"
             android:drawableLeft="@drawable/ic_baseline_search_24"
             android:paddingLeft="5dp"
-            android:text="Sök"
-            android:paddingRight="10dp"/>
+            android:paddingRight="10dp"
+            android:text="Sök" />
 
     </LinearLayout>
 

@@ -1,24 +1,23 @@
 package com.example.labcdrawer;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-public class FetchStationData {
+public class FetchRealTimeData {
 
-    public static void getJSONStationData(String searchString, Context context, Model model) {
+    public static void getJSONRealTimeData(String siteID, Context context, Model model) {
 
-        String url = "https://api.sl.se/api2/typeahead.json?key=939f2b004e7a4c16b24e48213abe680e&searchstring=" + searchString + "&stationsonly=True&maxresults=50";
+        String url = "https://api.sl.se/api2/realtimedeparturesV4.json?key=41f722982a6f48609a4e38ea1f38eb47&siteid=" + siteID + "&timewindow=60";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
-                    model.stationSearchDataReceived(response);
+                    model.realTimeDataReceived(response);
                 },
                 error -> {
-                    model.errorInStationSearchResponse(error);
+                    model.errorInRealTimeResponse(error);
                     error.printStackTrace();
                 });
         jsonObjectRequest.setShouldCache(false);

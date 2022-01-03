@@ -39,10 +39,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         model.setAppData(appData);
         model.setMainActivity(this);
 
-        if(savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new RealTimeBillBoardFragment()).commit();
+        if (savedInstanceState == null) {
+            RealTimeBillBoardFragment realTimeBillBoardFragment = RealTimeBillBoardFragment.newInstance(model.getFavouriteStationsStrings());
+            FragmentManager fragmentManagerBillboard = getSupportFragmentManager();
+            FragmentTransaction transactionBillboard = fragmentManagerBillboard.beginTransaction();
+            transactionBillboard.replace(R.id.fragment_container, realTimeBillBoardFragment, "REALTIME_BILLBOARD_FRAGMENT").commit();
             navigationView.setCheckedItem(R.id.nav_realTime_BillBoard);
         }
+
     }
 
     @Override
@@ -62,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 FragmentManager fragmentManagerBillboard = getSupportFragmentManager();
                 FragmentTransaction transactionBillboard = fragmentManagerBillboard.beginTransaction();
                 transactionBillboard.replace(R.id.fragment_container, realTimeBillBoardFragment, "REALTIME_BILLBOARD_FRAGMENT").commit();
+                navigationView.setCheckedItem(R.id.nav_realTime_BillBoard);
                 break;
             case R.id.nav_realTime_Search:
                 RealTimeSearchFragment realTimeSearchFragment = RealTimeSearchFragment.newInstance(model.getFavouriteStationsStrings());
@@ -69,30 +74,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 FragmentManager fragmentManagerSearchRT = getSupportFragmentManager();
                 FragmentTransaction transactionSearchRT = fragmentManagerSearchRT.beginTransaction();
                 transactionSearchRT.replace(R.id.fragment_container, realTimeSearchFragment, "REALTIME_SEARCH_FRAGMENT").commit();
+                navigationView.setCheckedItem(R.id.nav_realTime_Search);
                 break;
             case R.id.nav_realTime_Favourites:
                 RealTimeFavouriteFragment realTimeFavouriteFragment = RealTimeFavouriteFragment.newInstance(model.getFavouriteStationsStrings());
                 FragmentManager fragmentManagerFavRT = getSupportFragmentManager();
                 FragmentTransaction transactionFavRT = fragmentManagerFavRT.beginTransaction();
                 transactionFavRT.replace(R.id.fragment_container, realTimeFavouriteFragment, "REALTIME_FAVOURITE_FRAGMENT").commit();
+                navigationView.setCheckedItem(R.id.nav_realTime_Favourites);
                 break;
             case R.id.nav_trips_showFavs:
-                TripsHomeFragment tripsHomeFragment = TripsHomeFragment.newInstance(model.getFavouriteTripsStartStrings(),model.getFavouriteTripsEndStrings());
+                TripsHomeFragment tripsHomeFragment = TripsHomeFragment.newInstance(model.getFavouriteTripsStartStrings(), model.getFavouriteTripsEndStrings());
                 FragmentManager fragmentManagerHomeT = getSupportFragmentManager();
                 FragmentTransaction transactionHomeT = fragmentManagerHomeT.beginTransaction();
                 transactionHomeT.replace(R.id.fragment_container, tripsHomeFragment, "TRIPS_HOME_FRAGMENT").commit();
+                navigationView.setCheckedItem(R.id.nav_trips_showFavs);
                 break;
             case R.id.nav_trips_search:
-                TripsSearchFragment tripsSearchFragment = TripsSearchFragment.newInstance(model.getFavouriteTripsStartStrings(),model.getFavouriteTripsEndStrings());
+                TripsSearchFragment tripsSearchFragment = TripsSearchFragment.newInstance(model.getFavouriteTripsStartStrings(), model.getFavouriteTripsEndStrings());
                 FragmentManager fragmentManagerSearchT = getSupportFragmentManager();
                 FragmentTransaction transactionSearchT = fragmentManagerSearchT.beginTransaction();
                 transactionSearchT.replace(R.id.fragment_container, tripsSearchFragment, "TRIPS_SEARCH_FRAGMENT").commit();
+                navigationView.setCheckedItem(R.id.nav_trips_search);
                 break;
             case R.id.nav_trips_Favourites:
-                TripsFavouriteFragment tripsFavouriteFragment = TripsFavouriteFragment.newInstance(model.getFavouriteTripsStartStrings(),model.getFavouriteTripsEndStrings());
+                TripsFavouriteFragment tripsFavouriteFragment = TripsFavouriteFragment.newInstance(model.getFavouriteTripsStartStrings(), model.getFavouriteTripsEndStrings());
                 FragmentManager fragmentManagerFavT = getSupportFragmentManager();
                 FragmentTransaction transactionFavT = fragmentManagerFavT.beginTransaction();
                 transactionFavT.replace(R.id.fragment_container, tripsFavouriteFragment, "TRIPS_FAVOURITE_FRAGMENT").commit();
+                navigationView.setCheckedItem(R.id.nav_trips_Favourites);
                 break;
         }
 
@@ -131,6 +141,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         realTimeMenuItem.setTitle(realTimeString);
         tripMenuItem.setTitle(tripString);
 
+    }
+
+    private void returnToFragment(){
+        switch ((ReturnToFragment) getIntent().getSerializableExtra("Fragment")){
+            case REALTIME_BILLBOARD:
+
+                break;
+            case REALTIME_SEARCH:
+
+                break;
+            case TRIPS_HOME:
+
+                break;
+            case TRIPS_SEARCH:
+
+                break;
+            default:
+                break;
+        }
     }
 
 }

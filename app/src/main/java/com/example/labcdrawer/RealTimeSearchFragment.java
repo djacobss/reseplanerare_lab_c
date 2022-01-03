@@ -1,5 +1,6 @@
 package com.example.labcdrawer;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class RealTimeSearchFragment extends Fragment {
@@ -74,7 +76,10 @@ public class RealTimeSearchFragment extends Fragment {
         }, new RecycleSearchAdapter.ItemClickListenerName() {
             @Override
             public void onItemNameClick(LocationItem locationItem) {
-
+                Intent intent = new Intent(getContext(),StationRealTimeActivity.class);
+                intent.putExtra("Item",(Serializable) locationItem);
+                intent.putExtra("AppData",(Serializable) model.getAppData());
+                intent.putExtra("Fragment",ReturnToFragment.REALTIME_SEARCH);
             }
         });
         recyclerView.setLayoutManager(layoutManager);
