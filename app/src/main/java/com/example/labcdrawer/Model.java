@@ -103,12 +103,10 @@ public class Model {
                 if (i.getPlaceName().equals(item.getPlaceName())) {
                     item.setFavourite(true);
                     return true;
-                } else {
-                    item.setFavourite(false);
-                    return false;
                 }
             }
         }
+        item.setFavourite(false);
         return false;
     }
 

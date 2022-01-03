@@ -11,6 +11,7 @@
         <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/drawable/search_item_border.xml" value="0.5703125" />
         <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/drawable/searchbar_border.xml" value="0.32447916666666665" />
         <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/layout/activity_main.xml" value="0.490036231884058" />
+        <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/layout/activity_station_real_time.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/layout/billboard_item.xml" value="0.3307291666666667" />
         <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/layout/example_item.xml" value="0.3307291666666667" />
         <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/layout/fragment_real_time_bill_board.xml" value="0.490036231884058" />
@@ -20,6 +21,7 @@
         <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/layout/fragment_trips_home.xml" value="0.490036231884058" />
         <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/layout/fragment_trips_search.xml" value="0.490036231884058" />
         <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/layout/nav_header.xml" value="0.490036231884058" />
+        <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/layout/real_time_station_item.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Daniel Jacobsson/AndroidStudioProjects/LabCDrawer/app/src/main/res/menu/drawer_menu.xml" value="0.5541666666666667" />
       </map>
     </option>

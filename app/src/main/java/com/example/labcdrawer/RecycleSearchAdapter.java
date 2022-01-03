@@ -1,6 +1,7 @@
 package com.example.labcdrawer;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,9 +75,11 @@ public class RecycleSearchAdapter extends RecyclerView.Adapter<RecycleSearchAdap
                     if (currentItem.getFavourite()) {
                         holder.getSearchResultFavouriteImageView().setImageResource(R.drawable.ic_favourite_false);
                         currentItem.setFavourite(false);
+                        itemArrayList.get(pos).setFavourite(false);
                     } else {
                         holder.getSearchResultFavouriteImageView().setImageResource(R.drawable.ic_favourite_true);
                         currentItem.setFavourite(true);
+                        itemArrayList.get(pos).setFavourite(true);
                     }
                     itemClickListenerFav.onItemFavClick(currentItem);
                 }

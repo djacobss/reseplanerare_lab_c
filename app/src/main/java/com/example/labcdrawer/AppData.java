@@ -30,12 +30,13 @@ public class AppData {
     }
 
     public boolean addFavouriteStation(LocationItem station) {
-        if (favouriteStations.contains(station)) {
-            return false;
-        } else {
-            favouriteStations.add(station);
-            return true;
+        for (LocationItem item : favouriteStations) {
+            if(item.getPlaceName().equals(station.getPlaceName())){
+                return false;
+            }
         }
+        favouriteStations.add(station);
+        return true;
     }
 
     public boolean addFavouriteTrip(Trip trip) {
@@ -48,12 +49,14 @@ public class AppData {
     }
 
     public boolean removeFavouriteStation(LocationItem station) {
-        if (favouriteStations.contains(station)) {
-            favouriteStations.remove(station);
-            return true;
-        } else {
-            return false;
+        for (LocationItem item : favouriteStations) {
+            if(item.getPlaceName().equals(station.getPlaceName())){
+                if(favouriteStations.remove(station)){
+                    return true;
+                }
+            }
         }
+        return false;
     }
 
     public boolean removeFavouriteTrip(Trip trip) {
