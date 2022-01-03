@@ -1,5 +1,7 @@
 package com.example.labcdrawer;
 
+import android.util.Log;
+
 import com.android.volley.NoConnectionError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
@@ -15,7 +17,7 @@ public class Model {
     private RealTimeSearchFragment realTimeSearchFragment;
 
     public Model() {
-
+        appData = new AppData();
     }
 
     public void setAppData(AppData appData) {
@@ -29,7 +31,7 @@ public class Model {
     public ArrayList<Integer> getFavouriteStationsStrings() {
         ArrayList<Integer> stationStringList = new ArrayList<>();
         if (!appData.getFavouriteStations().isEmpty()) {
-            for (Station station : appData.getFavouriteStations()) {
+            for (LocationItem station : appData.getFavouriteStations()) {
                 stationStringList.add(station.getSiteID());
             }
         }
@@ -57,9 +59,15 @@ public class Model {
     }
 
     public void stationSearchDataReceived(JSONObject response) {
-        ArrayList<SearchRecyclerItem> searchResultList = ParseSearchStation.parseStationData(response);
-        for (SearchRecyclerItem searchItem : searchResultList) {
-            setSearchItemFavourite(searchItem);
+        ArrayList<LocationItem> searchResultList = ParseSearchStation.parseStationData(response);
+        int index = 0;
+        for (LocationItem searchItem : searchResultList) {
+            if (setSearchItemFavourite(searchItem)) {
+                searchResultList.get(index).setFavourite(true);
+            } else {
+                searchResultList.get(index).setFavourite(false);
+            }
+            index++;
         }
         realTimeSearchFragment.showResults(searchResultList);
     }
@@ -88,13 +96,27 @@ public class Model {
         return realTimeSearchFragment;
     }
 
-    public void setSearchItemFavourite(SearchRecyclerItem item) {
-        for (Station s : appData.getFavouriteStations()) {
-            if (s.getSiteID() == item.getSiteID()) {
-                item.setFavourite(true);
-            } else {
-                item.setFavourite(false);
+    public boolean setSearchItemFavourite(LocationItem item) {
+        if (!appData.getFavouriteStations().isEmpty()) {
+            ArrayList<LocationItem> tempList = appData.getFavouriteStations();
+            for (LocationItem i : tempList) {
+                if (i.getPlaceName().equals(item.getPlaceName())) {
+                    item.setFavourite(true);
+                    return true;
+                } else {
+                    item.setFavourite(false);
+                    return false;
+                }
             }
         }
+        return false;
+    }
+
+    public boolean addFavouriteStation(LocationItem station) {
+        return appData.addFavouriteStation(station);
+    }
+
+    public boolean removeFavouriteStation(LocationItem station) {
+        return appData.removeFavouriteStation(station);
     }
 }

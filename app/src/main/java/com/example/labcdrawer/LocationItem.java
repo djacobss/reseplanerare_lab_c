@@ -1,14 +1,15 @@
 package com.example.labcdrawer;
 
-public class SearchRecyclerItem {
+public class LocationItem {
 
     private String placeName;
     private int siteID;
     private boolean isFavourite;
 
-    public SearchRecyclerItem(String placeName, int siteID){
+    public LocationItem(String placeName, int siteID){
         this.placeName = placeName;
         this.siteID = siteID;
+        isFavourite = false;
     }
 
     public void setFavourite(boolean favourite) {

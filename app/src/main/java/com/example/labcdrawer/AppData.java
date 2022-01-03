@@ -5,19 +5,19 @@ import java.util.List;
 
 public class AppData {
 
-    private List<Station> favouriteStations;
-    private List<Trip> favouriteTrips;
+    private ArrayList<LocationItem> favouriteStations;
+    private ArrayList<Trip> favouriteTrips;
 
     public AppData() {
         favouriteStations = new ArrayList<>();
         favouriteTrips = new ArrayList<>();
     }
 
-    public List<Station> getFavouriteStations() {
+    public ArrayList<LocationItem> getFavouriteStations() {
         return favouriteStations;
     }
 
-    public void setFavouriteStations(List<Station> favouriteStations) {
+    public void setFavouriteStations(ArrayList<LocationItem> favouriteStations) {
         this.favouriteStations = favouriteStations;
     }
 
@@ -25,11 +25,11 @@ public class AppData {
         return favouriteTrips;
     }
 
-    public void setFavouriteTrips(List<Trip> favouriteTrips) {
+    public void setFavouriteTrips(ArrayList<Trip> favouriteTrips) {
         this.favouriteTrips = favouriteTrips;
     }
 
-    public boolean addFavouriteStation(Station station) {
+    public boolean addFavouriteStation(LocationItem station) {
         if (favouriteStations.contains(station)) {
             return false;
         } else {
@@ -47,7 +47,7 @@ public class AppData {
         }
     }
 
-    public boolean removeFavouriteStation(Station station) {
+    public boolean removeFavouriteStation(LocationItem station) {
         if (favouriteStations.contains(station)) {
             favouriteStations.remove(station);
             return true;

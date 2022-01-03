@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +27,7 @@ public class RealTimeSearchFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<SearchRecyclerItem> searchRecyclerItems;
+    private ArrayList<LocationItem> locationItems;
     private View mainView;
     private EditText searchBar;
     private Button searchBtn;
@@ -58,10 +59,24 @@ public class RealTimeSearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_real_time_search, container, false);
         mainView = view;
-        searchRecyclerItems = new ArrayList<>();
+        locationItems = new ArrayList<>();
         recyclerView = view.findViewById(R.id.realTimeSearchRecyclerView);
         layoutManager = new LinearLayoutManager(view.getContext());
-        adapter = new RecycleSearchAdapter(searchRecyclerItems);
+        adapter = new RecycleSearchAdapter(locationItems, getContext(), new RecycleSearchAdapter.ItemClickListenerFav() {
+            @Override
+            public void onItemFavClick(LocationItem locationItem) {
+                if (locationItem.getFavourite()) {
+                    model.addFavouriteStation(locationItem);
+                } else {
+                    model.removeFavouriteStation(locationItem);
+                }
+            }
+        }, new RecycleSearchAdapter.ItemClickListenerName() {
+            @Override
+            public void onItemNameClick(LocationItem locationItem) {
+
+            }
+        });
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         searchBar = view.findViewById(R.id.realTimeSearchEditText);
@@ -71,13 +86,12 @@ public class RealTimeSearchFragment extends Fragment {
         searchBar.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER){
-                    //TODO
-                    if(searchBar.getText().toString().length() == 0){
+                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                    if (searchBar.getText().toString().length() == 0) {
                         searchBar.setError("Ingen text angiven");
                         return false;
                     } else {
-                        FetchStationData.getJSONStationData(searchBar.getText().toString(),model);
+                        FetchStationData.getJSONStationData(searchBar.getText().toString(), view.getContext(), model);
                         return true;
                     }
                 }
@@ -87,10 +101,10 @@ public class RealTimeSearchFragment extends Fragment {
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(searchBar.getText().toString().length() == 0){
+                if (searchBar.getText().toString().length() == 0) {
                     searchBar.setError("Ingen text angiven");
                 } else {
-                    FetchStationData.getJSONStationData(searchBar.getText().toString(),model);
+                    FetchStationData.getJSONStationData(searchBar.getText().toString(), view.getContext(), model);
                 }
             }
         });
@@ -109,19 +123,38 @@ public class RealTimeSearchFragment extends Fragment {
         this.model = model;
     }
 
-    public void searchTimeOutError(){
-        Toast.makeText(mainView.getContext(), "Ingen Anslutning",Toast.LENGTH_LONG);
+    public void searchTimeOutError() {
+        Toast.makeText(getContext(), "Ingen Anslutning", Toast.LENGTH_LONG).show();
     }
 
-    public void wrongInputError(){
-        Toast.makeText(mainView.getContext(), "Inga Resultat",Toast.LENGTH_LONG);
+    public void wrongInputError() {
+        Toast.makeText(getContext(), "Inga Resultat", Toast.LENGTH_LONG).show();
     }
 
-    public void showResults(ArrayList<SearchRecyclerItem> searchResultList) {
-        for (SearchRecyclerItem item : searchResultList) {
-            if(item.getFavourite()){
+    public void showResults(ArrayList<LocationItem> searchResultList) {
+        locationItems.clear();
+        locationItems.addAll(searchResultList);
+        layoutManager = new LinearLayoutManager(getContext());
+        adapter = new RecycleSearchAdapter(locationItems, getContext(), new RecycleSearchAdapter.ItemClickListenerFav() {
+            @Override
+            public void onItemFavClick(LocationItem locationItem) {
+                if (locationItem.getFavourite()) {
+                    model.addFavouriteStation(locationItem);
+                } else {
+                    model.removeFavouriteStation(locationItem);
+                }
+            }
+        }, new RecycleSearchAdapter.ItemClickListenerName() {
+            @Override
+            public void onItemNameClick(LocationItem locationItem) {
 
             }
-        }
+        });
+        recyclerView.setLayoutManager(layoutManager);
+        adapter.notifyDataSetChanged();
+        recyclerView.setAdapter(adapter);
+
     }
+
+
 }
