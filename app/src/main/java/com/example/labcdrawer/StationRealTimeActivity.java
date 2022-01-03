@@ -54,7 +54,7 @@ public class StationRealTimeActivity extends AppCompatActivity {
                 returnToMain();
             }
         });
-        FetchRealTimeData.getJSONRealTimeData(Integer.toString(currentItem.getSiteID()),this,model);
+        RealTimeDataFetcher.getJSONRealTimeData(Integer.toString(currentItem.getSiteID()),this,model);
         recyclerView = findViewById(R.id.realTimeRecyclerViewStation);
     }
 
@@ -70,18 +70,23 @@ public class StationRealTimeActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.transportModeBusItem:
                 model.getAppData().setRealTimeTransportMode(TransportMode.BUS);
+                RealTimeDataFetcher.getJSONRealTimeData(Integer.toString(currentItem.getSiteID()),this,model);
                 break;
             case R.id.transportModeMetroItem:
                 model.getAppData().setRealTimeTransportMode(TransportMode.METRO);
+                RealTimeDataFetcher.getJSONRealTimeData(Integer.toString(currentItem.getSiteID()),this,model);
                 break;
             case R.id.transportModeTrainItem:
                 model.getAppData().setRealTimeTransportMode(TransportMode.TRAIN);
+                RealTimeDataFetcher.getJSONRealTimeData(Integer.toString(currentItem.getSiteID()),this,model);
                 break;
             case R.id.transportModeTramItem:
                 model.getAppData().setRealTimeTransportMode(TransportMode.TRAM);
+                RealTimeDataFetcher.getJSONRealTimeData(Integer.toString(currentItem.getSiteID()),this,model);
                 break;
             case R.id.transportModeShipItem:
                 model.getAppData().setRealTimeTransportMode(TransportMode.SHIP);
+                RealTimeDataFetcher.getJSONRealTimeData(Integer.toString(currentItem.getSiteID()),this,model);
                 break;
         }
         return super.onOptionsItemSelected(item);
