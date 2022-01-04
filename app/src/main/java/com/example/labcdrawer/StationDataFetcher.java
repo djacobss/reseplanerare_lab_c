@@ -7,7 +7,7 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-public class FetchStationData {
+public class StationDataFetcher {
 
     public static void getJSONStationData(String searchString, Context context, Model model) {
 

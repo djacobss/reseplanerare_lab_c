@@ -100,7 +100,7 @@ public class RealTimeSearchFragment extends Fragment {
                         return false;
                     } else {
                         model.getAppData().setLastSearchString(searchBar.getText().toString());
-                        FetchStationData.getJSONStationData(searchBar.getText().toString(), view.getContext(), model);
+                        StationDataFetcher.getJSONStationData(searchBar.getText().toString(), view.getContext(), model);
                         return true;
                     }
                 }
@@ -114,12 +114,12 @@ public class RealTimeSearchFragment extends Fragment {
                     searchBar.setError("Ingen text angiven");
                 } else {
                     model.getAppData().setLastSearchString(searchBar.getText().toString());
-                    FetchStationData.getJSONStationData(searchBar.getText().toString(), view.getContext(), model);
+                    StationDataFetcher.getJSONStationData(searchBar.getText().toString(), view.getContext(), model);
                 }
             }
         });
         if(searchFromStart){
-            FetchStationData.getJSONStationData(model.getAppData().getLastSearchString(),view.getContext(),model);
+            StationDataFetcher.getJSONStationData(model.getAppData().getLastSearchString(),view.getContext(),model);
         }
         return view;
     }

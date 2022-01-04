@@ -3,6 +3,7 @@ package com.example.labcdrawer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,10 @@ public class RealTimeBillBoardFragment extends Fragment {
     private static final String STATION_LIST = "stationList";
 
     private ArrayList<Integer> stationList;
+    private Model model;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     public RealTimeBillBoardFragment() {
 
@@ -40,6 +45,16 @@ public class RealTimeBillBoardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_real_time_bill_board, container, false);
+        View view = inflater.inflate(R.layout.fragment_real_time_bill_board, container, false);
+        BillboardDataFetcher.getBillboardJSONData(model.getFavouriteStationStrings(),view.getContext(),model);
+        return view;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
+    public void showResults(ArrayList<BillboardItem> billboardItems){
+
     }
 }

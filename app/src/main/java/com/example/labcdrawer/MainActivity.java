@@ -19,8 +19,6 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
@@ -48,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         if (savedInstanceState == null && intent.getSerializableExtra("AppData") == null) {
-            RealTimeBillBoardFragment realTimeBillBoardFragment = RealTimeBillBoardFragment.newInstance(model.getFavouriteStationsStrings());
+            RealTimeBillBoardFragment realTimeBillBoardFragment = RealTimeBillBoardFragment.newInstance(model.getFavouriteStationInts());
             FragmentManager fragmentManagerBillboard = getSupportFragmentManager();
             FragmentTransaction transactionBillboard = fragmentManagerBillboard.beginTransaction();
             transactionBillboard.replace(R.id.fragment_container, realTimeBillBoardFragment, "REALTIME_BILLBOARD_FRAGMENT").commit();
@@ -70,14 +68,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_realTime_BillBoard:
-                RealTimeBillBoardFragment realTimeBillBoardFragment = RealTimeBillBoardFragment.newInstance(model.getFavouriteStationsStrings());
+                RealTimeBillBoardFragment realTimeBillBoardFragment = RealTimeBillBoardFragment.newInstance(model.getFavouriteStationInts());
                 FragmentManager fragmentManagerBillboard = getSupportFragmentManager();
                 FragmentTransaction transactionBillboard = fragmentManagerBillboard.beginTransaction();
                 transactionBillboard.replace(R.id.fragment_container, realTimeBillBoardFragment, "REALTIME_BILLBOARD_FRAGMENT").commit();
                 navigationView.setCheckedItem(R.id.nav_realTime_BillBoard);
                 break;
             case R.id.nav_realTime_Search:
-                RealTimeSearchFragment realTimeSearchFragment = RealTimeSearchFragment.newInstance(model.getFavouriteStationsStrings());
+                RealTimeSearchFragment realTimeSearchFragment = RealTimeSearchFragment.newInstance(model.getFavouriteStationInts());
                 realTimeSearchFragment.setModel(model);
                 FragmentManager fragmentManagerSearchRT = getSupportFragmentManager();
                 FragmentTransaction transactionSearchRT = fragmentManagerSearchRT.beginTransaction();
@@ -85,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 navigationView.setCheckedItem(R.id.nav_realTime_Search);
                 break;
             case R.id.nav_realTime_Favourites:
-                RealTimeFavouriteFragment realTimeFavouriteFragment = RealTimeFavouriteFragment.newInstance(model.getFavouriteStationsStrings());
+                RealTimeFavouriteFragment realTimeFavouriteFragment = RealTimeFavouriteFragment.newInstance(model.getFavouriteStationInts());
                 realTimeFavouriteFragment.setModel(model);
                 FragmentManager fragmentManagerFavRT = getSupportFragmentManager();
                 FragmentTransaction transactionFavRT = fragmentManagerFavRT.beginTransaction();
@@ -156,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Log.e("Test: ", "In returnToFragment start");
         switch ((ReturnToFragment) getIntent().getSerializableExtra("Fragment")){
             case REALTIME_BILLBOARD:
-                RealTimeBillBoardFragment realTimeBillBoardFragment = RealTimeBillBoardFragment.newInstance(model.getFavouriteStationsStrings());
+                RealTimeBillBoardFragment realTimeBillBoardFragment = RealTimeBillBoardFragment.newInstance(model.getFavouriteStationInts());
                 FragmentManager fragmentManagerBillboard = getSupportFragmentManager();
                 FragmentTransaction transactionBillboard = fragmentManagerBillboard.beginTransaction();
                 transactionBillboard.replace(R.id.fragment_container, realTimeBillBoardFragment, "REALTIME_BILLBOARD_FRAGMENT").commit();
@@ -164,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case REALTIME_SEARCH:
                 Log.e("Test: ","In returnToFragment in case");
-                RealTimeSearchFragment realTimeSearchFragment = RealTimeSearchFragment.newInstance(model.getFavouriteStationsStrings());
+                RealTimeSearchFragment realTimeSearchFragment = RealTimeSearchFragment.newInstance(model.getFavouriteStationInts());
                 realTimeSearchFragment.setModel(model);
                 realTimeSearchFragment.setSearchFromStart(true);
                 FragmentManager fragmentManagerSearchRT = getSupportFragmentManager();

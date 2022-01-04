@@ -29,7 +29,7 @@ public class Model {
         return appData;
     }
 
-    public ArrayList<Integer> getFavouriteStationsStrings() {
+    public ArrayList<Integer> getFavouriteStationInts() {
         ArrayList<Integer> stationStringList = new ArrayList<>();
         if (!appData.getFavouriteStations().isEmpty()) {
             for (LocationItem station : appData.getFavouriteStations()) {
@@ -37,6 +37,16 @@ public class Model {
             }
         }
         return stationStringList;
+    }
+
+    public ArrayList<String> getFavouriteStationStrings(){
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        if(!appData.getFavouriteStations().isEmpty()){
+            for (LocationItem station : appData.getFavouriteStations()) {
+                stringArrayList.add(Integer.toString(station.getSiteID()));
+            }
+        }
+        return stringArrayList;
     }
 
     public ArrayList<Integer> getFavouriteTripsStartStrings() {
@@ -156,4 +166,7 @@ public class Model {
         this.stationRealTimeActivity = stationRealTimeActivity;
     }
 
+    public void billboardDataReceived(ArrayList<JSONObject> objects) {
+
+    }
 }
