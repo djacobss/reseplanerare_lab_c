@@ -155,4 +155,5 @@ public class Model {
     public void setStationRealTimeActivity(StationRealTimeActivity stationRealTimeActivity) {
         this.stationRealTimeActivity = stationRealTimeActivity;
     }
+
 }

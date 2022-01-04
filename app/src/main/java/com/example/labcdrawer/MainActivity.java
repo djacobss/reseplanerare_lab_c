@@ -43,13 +43,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Intent intent = getIntent();
         if((AppData) intent.getSerializableExtra("AppData") != null){
-            Log.e("Test: ","OnCreate i if-sats");
             model.setAppData((AppData) intent.getSerializableExtra("AppData"));
             returnToFragment();
         }
 
         if (savedInstanceState == null && intent.getSerializableExtra("AppData") == null) {
-            Log.e("Test: ","OnCreate i if-sats 2");
             RealTimeBillBoardFragment realTimeBillBoardFragment = RealTimeBillBoardFragment.newInstance(model.getFavouriteStationsStrings());
             FragmentManager fragmentManagerBillboard = getSupportFragmentManager();
             FragmentTransaction transactionBillboard = fragmentManagerBillboard.beginTransaction();
@@ -88,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_realTime_Favourites:
                 RealTimeFavouriteFragment realTimeFavouriteFragment = RealTimeFavouriteFragment.newInstance(model.getFavouriteStationsStrings());
+                realTimeFavouriteFragment.setModel(model);
                 FragmentManager fragmentManagerFavRT = getSupportFragmentManager();
                 FragmentTransaction transactionFavRT = fragmentManagerFavRT.beginTransaction();
                 transactionFavRT.replace(R.id.fragment_container, realTimeFavouriteFragment, "REALTIME_FAVOURITE_FRAGMENT").commit();

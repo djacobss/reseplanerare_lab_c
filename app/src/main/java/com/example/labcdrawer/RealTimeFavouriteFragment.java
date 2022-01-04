@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,9 +53,7 @@ public class RealTimeFavouriteFragment extends Fragment {
         adapter = new RecyclerFavouriteAdapter(model.getAppData().getFavouriteStations(), view.getContext(), new RecyclerFavouriteAdapter.FavItemClickListener() {
             @Override
             public void onFavItemClicked(LocationItem locationItem) {
-                if(locationItem.getFavourite()){
-                    model.getAppData().addFavouriteStation(locationItem);
-                } else {
+                if (model.getAppData().getFavouriteStations().contains(locationItem)) {
                     model.getAppData().removeFavouriteStation(locationItem);
                 }
             }
@@ -62,5 +61,9 @@ public class RealTimeFavouriteFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         return view;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.labcdrawer;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,21 +58,16 @@ public class RecyclerFavouriteAdapter extends RecyclerView.Adapter<RecyclerFavou
     public void onBindViewHolder(@NonNull RecyclerFavouriteAdapterViewHolder holder, int position) {
         LocationItem currentItem = itemArrayList.get(position);
         holder.getNameTextView().setText(currentItem.getPlaceName());
-        holder.getFavouriteImageView().setImageResource(R.drawable.ic_favourite_true);
+        holder.getFavouriteImageView().setImageResource(R.drawable.ic_remove_item);
         int pos = position;
         holder.getFavouriteImageView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(itemArrayList.get(pos).getFavourite()) {
-                    holder.getFavouriteImageView().setImageResource(R.drawable.ic_favourite_false);
-                    currentItem.setFavourite(false);
-                    itemArrayList.get(pos).setFavourite(false);
-                } else {
-                    holder.getFavouriteImageView().setImageResource(R.drawable.ic_favourite_true);
-                    currentItem.setFavourite(true);
-                    itemArrayList.get(pos).setFavourite(true);
+                if(itemArrayList.contains(currentItem)) {
+                    itemArrayList.remove(currentItem);
+                    notifyItemRemoved(holder.getBindingAdapterPosition());
+
                 }
-                favItemClickListener.onFavItemClicked(currentItem);
             }
         });
     }
