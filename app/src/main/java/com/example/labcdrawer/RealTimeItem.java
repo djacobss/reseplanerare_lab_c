@@ -20,6 +20,10 @@ public class RealTimeItem {
         return lineNumber;
     }
 
+    public String getLineNumberString(){
+        return Integer.toString(lineNumber);
+    }
+
     public void setLineNumber(int lineNumber) {
         this.lineNumber = lineNumber;
     }

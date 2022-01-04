@@ -58,7 +58,7 @@ public class RecyclerStationAdapter extends RecyclerView.Adapter<RecyclerStation
     @Override
     public void onBindViewHolder(@NonNull RecyclerStationViewHolder holder, int position) {
         RealTimeItem currentItem = realTimeItems.get(position);
-        holder.getLineTextView().setText(currentItem.getLineNumber());
+        holder.getLineTextView().setText(currentItem.getLineNumberString());
         holder.getDestinationTextView().setText(currentItem.getBusDestination());
         holder.getTimeTextView().setText(currentItem.getTimeLeft());
     }

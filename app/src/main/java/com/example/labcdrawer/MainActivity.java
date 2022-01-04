@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.TextAppearanceSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -41,12 +42,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         model.setMainActivity(this);
 
         Intent intent = getIntent();
-        if(intent.getSerializableExtra("Appdata") != null){
+        if((AppData) intent.getSerializableExtra("AppData") != null){
+            Log.e("Test: ","OnCreate i if-sats");
             model.setAppData((AppData) intent.getSerializableExtra("AppData"));
             returnToFragment();
         }
 
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null && intent.getSerializableExtra("AppData") == null) {
+            Log.e("Test: ","OnCreate i if-sats 2");
             RealTimeBillBoardFragment realTimeBillBoardFragment = RealTimeBillBoardFragment.newInstance(model.getFavouriteStationsStrings());
             FragmentManager fragmentManagerBillboard = getSupportFragmentManager();
             FragmentTransaction transactionBillboard = fragmentManagerBillboard.beginTransaction();
@@ -151,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void returnToFragment(){
+        Log.e("Test: ", "In returnToFragment start");
         switch ((ReturnToFragment) getIntent().getSerializableExtra("Fragment")){
             case REALTIME_BILLBOARD:
                 RealTimeBillBoardFragment realTimeBillBoardFragment = RealTimeBillBoardFragment.newInstance(model.getFavouriteStationsStrings());
@@ -160,8 +164,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 navigationView.setCheckedItem(R.id.nav_realTime_BillBoard);
                 break;
             case REALTIME_SEARCH:
+                Log.e("Test: ","In returnToFragment in case");
                 RealTimeSearchFragment realTimeSearchFragment = RealTimeSearchFragment.newInstance(model.getFavouriteStationsStrings());
                 realTimeSearchFragment.setModel(model);
+                realTimeSearchFragment.setSearchFromStart(true);
                 FragmentManager fragmentManagerSearchRT = getSupportFragmentManager();
                 FragmentTransaction transactionSearchRT = fragmentManagerSearchRT.beginTransaction();
                 transactionSearchRT.replace(R.id.fragment_container, realTimeSearchFragment, "REALTIME_SEARCH_FRAGMENT").commit();

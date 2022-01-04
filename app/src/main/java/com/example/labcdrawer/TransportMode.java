@@ -1,6 +1,8 @@
 package com.example.labcdrawer;
 
-public enum TransportMode {
+import java.io.Serializable;
+
+public enum TransportMode implements Serializable {
 
     BUS, METRO, TRAIN, TRAM, SHIP
 

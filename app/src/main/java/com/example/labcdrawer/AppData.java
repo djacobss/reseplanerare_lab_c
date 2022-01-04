@@ -8,11 +8,8 @@ public class AppData implements Serializable {
 
     private ArrayList<LocationItem> favouriteStations;
     private ArrayList<Trip> favouriteTrips;
-    private MainActivity mainActivity;
-    private RealTimeSearchFragment realTimeSearchFragment;
-    private String lastUpdatedRealTime;
+    private String lastUpdatedRealTime, lastSearchString;
     private TransportMode realTimeTransportMode;
-    private StationRealTimeActivity stationRealTimeActivity;
 
     public AppData() {
         favouriteStations = new ArrayList<>();
@@ -75,22 +72,6 @@ public class AppData implements Serializable {
         }
     }
 
-    public void setMainActivity(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
-    }
-
-    public void setRealTimeSearchFragment(RealTimeSearchFragment realTimeSearchFragment) {
-        this.realTimeSearchFragment = realTimeSearchFragment;
-    }
-
-    public MainActivity getMainActivity() {
-        return mainActivity;
-    }
-
-    public RealTimeSearchFragment getRealTimeSearchFragment() {
-        return realTimeSearchFragment;
-    }
-
     public String getLastUpdatedRealTime() {
         return lastUpdatedRealTime;
     }
@@ -107,11 +88,11 @@ public class AppData implements Serializable {
         this.realTimeTransportMode = realTimeTransportMode;
     }
 
-    public StationRealTimeActivity getStationRealTimeActivity() {
-        return stationRealTimeActivity;
+    public String getLastSearchString() {
+        return lastSearchString;
     }
 
-    public void setStationRealTimeActivity(StationRealTimeActivity stationRealTimeActivity) {
-        this.stationRealTimeActivity = stationRealTimeActivity;
+    public void setLastSearchString(String leastSearchString) {
+        this.lastSearchString = leastSearchString;
     }
 }

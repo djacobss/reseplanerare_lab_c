@@ -39,14 +39,14 @@ public class StationRealTimeActivity extends AppCompatActivity {
         appData = (AppData) getIntent().getSerializableExtra("AppData");
         returnToFragment = (ReturnToFragment) getIntent().getSerializableExtra("Fragment");
         model = new Model();
-        appData.setStationRealTimeActivity(this);
         model.setAppData(appData);
+        model.setStationRealTimeActivity(this);
 
         lastUpdated = findViewById(R.id.realTimeStationLastUpdatedText);
 
         toolbar = findViewById(R.id.toolbarStationRealTime);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(currentItem.getPlaceName());
+        getSupportActionBar().setTitle(currentItem.getPlaceName());
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_backaction));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +54,7 @@ public class StationRealTimeActivity extends AppCompatActivity {
                 returnToMain();
             }
         });
-        RealTimeDataFetcher.getJSONRealTimeData(Integer.toString(currentItem.getSiteID()),this,model);
+        RealTimeDataFetcher.getJSONRealTimeData(Integer.toString(currentItem.getSiteID()), this, model);
         recyclerView = findViewById(R.id.realTimeRecyclerViewStation);
     }
 
@@ -67,26 +67,26 @@ public class StationRealTimeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.transportModeBusItem:
                 model.getAppData().setRealTimeTransportMode(TransportMode.BUS);
-                RealTimeDataFetcher.getJSONRealTimeData(Integer.toString(currentItem.getSiteID()),this,model);
+                RealTimeDataFetcher.getJSONRealTimeData(Integer.toString(currentItem.getSiteID()), this, model);
                 break;
             case R.id.transportModeMetroItem:
                 model.getAppData().setRealTimeTransportMode(TransportMode.METRO);
-                RealTimeDataFetcher.getJSONRealTimeData(Integer.toString(currentItem.getSiteID()),this,model);
+                RealTimeDataFetcher.getJSONRealTimeData(Integer.toString(currentItem.getSiteID()), this, model);
                 break;
             case R.id.transportModeTrainItem:
                 model.getAppData().setRealTimeTransportMode(TransportMode.TRAIN);
-                RealTimeDataFetcher.getJSONRealTimeData(Integer.toString(currentItem.getSiteID()),this,model);
+                RealTimeDataFetcher.getJSONRealTimeData(Integer.toString(currentItem.getSiteID()), this, model);
                 break;
             case R.id.transportModeTramItem:
                 model.getAppData().setRealTimeTransportMode(TransportMode.TRAM);
-                RealTimeDataFetcher.getJSONRealTimeData(Integer.toString(currentItem.getSiteID()),this,model);
+                RealTimeDataFetcher.getJSONRealTimeData(Integer.toString(currentItem.getSiteID()), this, model);
                 break;
             case R.id.transportModeShipItem:
                 model.getAppData().setRealTimeTransportMode(TransportMode.SHIP);
-                RealTimeDataFetcher.getJSONRealTimeData(Integer.toString(currentItem.getSiteID()),this,model);
+                RealTimeDataFetcher.getJSONRealTimeData(Integer.toString(currentItem.getSiteID()), this, model);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -97,10 +97,10 @@ public class StationRealTimeActivity extends AppCompatActivity {
         returnToMain();
     }
 
-    private void returnToMain(){
+    private void returnToMain() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("Fragment", (Serializable) returnToFragment);
-        intent.putExtra("AppData",(Serializable) appData);
+        intent.putExtra("AppData", (Serializable) appData);
         startActivity(intent);
     }
 

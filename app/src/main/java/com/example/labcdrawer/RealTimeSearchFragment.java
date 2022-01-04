@@ -35,9 +35,10 @@ public class RealTimeSearchFragment extends Fragment {
     private Button searchBtn;
     private ImageView itemFavouriteBtn;
     private Model model;
+    private boolean searchFromStart;
 
     public RealTimeSearchFragment() {
-
+        searchFromStart = false;
     }
 
     public static RealTimeSearchFragment newInstance(ArrayList<Integer> listOfStations) {
@@ -76,10 +77,12 @@ public class RealTimeSearchFragment extends Fragment {
         }, new RecycleSearchAdapter.ItemClickListenerName() {
             @Override
             public void onItemNameClick(LocationItem locationItem) {
-                Intent intent = new Intent(getContext(),StationRealTimeActivity.class);
+                Log.e("Test: ", "In click");
+                Intent intent = new Intent(getActivity(),StationRealTimeActivity.class);
                 intent.putExtra("Item",(Serializable) locationItem);
                 intent.putExtra("AppData",(Serializable) model.getAppData());
-                intent.putExtra("Fragment",ReturnToFragment.REALTIME_SEARCH);
+                intent.putExtra("Fragment",(Serializable) ReturnToFragment.REALTIME_SEARCH);
+                startActivity(intent);
             }
         });
         recyclerView.setLayoutManager(layoutManager);
@@ -96,6 +99,7 @@ public class RealTimeSearchFragment extends Fragment {
                         searchBar.setError("Ingen text angiven");
                         return false;
                     } else {
+                        model.getAppData().setLastSearchString(searchBar.getText().toString());
                         FetchStationData.getJSONStationData(searchBar.getText().toString(), view.getContext(), model);
                         return true;
                     }
@@ -109,10 +113,14 @@ public class RealTimeSearchFragment extends Fragment {
                 if (searchBar.getText().toString().length() == 0) {
                     searchBar.setError("Ingen text angiven");
                 } else {
+                    model.getAppData().setLastSearchString(searchBar.getText().toString());
                     FetchStationData.getJSONStationData(searchBar.getText().toString(), view.getContext(), model);
                 }
             }
         });
+        if(searchFromStart){
+            FetchStationData.getJSONStationData(model.getAppData().getLastSearchString(),view.getContext(),model);
+        }
         return view;
     }
 
@@ -152,7 +160,11 @@ public class RealTimeSearchFragment extends Fragment {
         }, new RecycleSearchAdapter.ItemClickListenerName() {
             @Override
             public void onItemNameClick(LocationItem locationItem) {
-
+                Intent intent = new Intent(getActivity(),StationRealTimeActivity.class);
+                intent.putExtra("Item",(Serializable) locationItem);
+                intent.putExtra("AppData",(Serializable) model.getAppData());
+                intent.putExtra("Fragment",(Serializable) ReturnToFragment.REALTIME_SEARCH);
+                startActivity(intent);
             }
         });
         recyclerView.setLayoutManager(layoutManager);
@@ -161,5 +173,7 @@ public class RealTimeSearchFragment extends Fragment {
 
     }
 
-
+    public void setSearchFromStart(boolean searchFromStart) {
+        this.searchFromStart = searchFromStart;
+    }
 }

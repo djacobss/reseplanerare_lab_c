@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,20 +13,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class RecycleSearchAdapter extends RecyclerView.Adapter<RecycleSearchAdapter.RecycleAdapterViewHolder> {
+public class RecycleSearchAdapter extends RecyclerView.Adapter<RecycleSearchAdapter.RecycleSearchAdapterViewHolder> {
 
     private ArrayList<LocationItem> itemArrayList;
     private ItemClickListenerFav itemClickListenerFav;
     private ItemClickListenerName itemClickListenerName;
     private Context context;
 
-    public static class RecycleAdapterViewHolder extends RecyclerView.ViewHolder {
+    public static class RecycleSearchAdapterViewHolder extends RecyclerView.ViewHolder {
 
         private TextView searchResultTextView;
         private ImageView searchResultFavouriteImageView;
 
 
-        public RecycleAdapterViewHolder(View itemView) {
+        public RecycleSearchAdapterViewHolder(View itemView) {
             super(itemView);
             searchResultTextView = itemView.findViewById(R.id.realTimeSearchCardViewText);
             searchResultFavouriteImageView = itemView.findViewById(R.id.realTimeSearchFavouriteImageView);
@@ -52,14 +51,14 @@ public class RecycleSearchAdapter extends RecyclerView.Adapter<RecycleSearchAdap
 
     @NonNull
     @Override
-    public RecycleAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecycleSearchAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
-        RecycleAdapterViewHolder recycleAdapterViewHolder = new RecycleAdapterViewHolder(view);
-        return recycleAdapterViewHolder;
+        RecycleSearchAdapterViewHolder recycleSearchAdapterViewHolder = new RecycleSearchAdapterViewHolder(view);
+        return recycleSearchAdapterViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecycleAdapterViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecycleSearchAdapterViewHolder holder, int position) {
         LocationItem currentItem = itemArrayList.get(position);
         holder.getSearchResultTextView().setText(currentItem.getPlaceName());
         if (currentItem.getFavourite()) {
@@ -88,7 +87,9 @@ public class RecycleSearchAdapter extends RecyclerView.Adapter<RecycleSearchAdap
         holder.getSearchResultTextView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("Test: ", "In Adapter Click");
                 if (itemClickListenerName != null) {
+                    Log.e("Test: ", "In Adapter Click");
                     itemClickListenerName.onItemNameClick(currentItem);
                 }
             }
