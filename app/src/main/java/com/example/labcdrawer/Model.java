@@ -1,5 +1,7 @@
 package com.example.labcdrawer;
 
+import android.util.Log;
+
 import com.android.volley.NoConnectionError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
@@ -16,9 +18,14 @@ public class Model {
     private MainActivity mainActivity;
     private RealTimeSearchFragment searchFragment;
     private StationRealTimeActivity stationRealTimeActivity;
+    private RealTimeBillBoardFragment billBoardFragment;
+    private ArrayList<JSONObject> billboardObjectContainer;
+    private ArrayList<Integer> billboardSiteIDContainer;
 
     public Model() {
         appData = new AppData();
+        billboardObjectContainer = new ArrayList<>();
+        billboardSiteIDContainer = new ArrayList<>();
     }
 
     public void setAppData(AppData appData) {
@@ -166,7 +173,29 @@ public class Model {
         this.stationRealTimeActivity = stationRealTimeActivity;
     }
 
-    public void billboardDataReceived(ArrayList<JSONObject> objects) {
+    public void billboardDataReceived(ArrayList<JSONObject> objects, ArrayList<Integer> siteIDs) {
+        ArrayList<BillboardItem> billboardItems = BillboardParser.parseBillboardJSON(objects,this, siteIDs);
+        billboardObjectContainer.clear();
+        billboardSiteIDContainer.clear();
+        billBoardFragment.showResults(billboardItems);
+    }
 
+    public RealTimeBillBoardFragment getBillBoardFragment() {
+        return billBoardFragment;
+    }
+
+    public void setBillBoardFragment(RealTimeBillBoardFragment billBoardFragment) {
+        this.billBoardFragment = billBoardFragment;
+    }
+
+    public void waitForResponses(JSONObject object, int size, int siteID){
+        billboardObjectContainer.add(object);
+        billboardSiteIDContainer.add(siteID);
+        for (Integer i : billboardSiteIDContainer) {
+            Log.e("Test in Model 1: ", "OB container: " + billboardObjectContainer.size() + "SiteID Container: " + billboardSiteIDContainer.size());
+        }
+        if(billboardObjectContainer.size() == size){
+            billboardDataReceived(billboardObjectContainer, billboardSiteIDContainer);
+        }
     }
 }

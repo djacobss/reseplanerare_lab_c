@@ -6,19 +6,19 @@ import java.util.ArrayList;
 public class BillboardItem implements Serializable {
 
     private String stationName,nextLineNumber,nextDisplayTime;
-    private ArrayList<String> comingLines, comingDestinations, comingDisplayTimes;
+    private ArrayList<BillboardSubItem> billboardSubItems;
+    private boolean isOpen;
 
     public BillboardItem(){
-
+        isOpen = false;
     }
 
-    public BillboardItem(String stationName, String nextLineNumber, String nextDisplayTime, ArrayList<String> comingLines, ArrayList<String> comingDestinations, ArrayList<String> comingDisplayTimes){
+    public BillboardItem(String stationName, String nextLineNumber, String nextDisplayTime, ArrayList<BillboardSubItem> billboardSubItems){
         this.stationName = stationName;
         this.nextLineNumber = nextLineNumber;
         this.nextDisplayTime = nextDisplayTime;
-        this.comingLines = comingLines;
-        this.comingDestinations = comingDestinations;
-        this.comingDisplayTimes = comingDisplayTimes;
+        this.billboardSubItems = billboardSubItems;
+        isOpen = false;
     }
 
     public String getStationName() {
@@ -45,27 +45,19 @@ public class BillboardItem implements Serializable {
         this.nextDisplayTime = nextDisplayTime;
     }
 
-    public ArrayList<String> getComingLines() {
-        return comingLines;
+    public ArrayList<BillboardSubItem> getBillboardSubItems() {
+        return billboardSubItems;
     }
 
-    public void setComingLines(ArrayList<String> comingLines) {
-        this.comingLines = comingLines;
+    public void setBillboardSubItems(ArrayList<BillboardSubItem> billboardSubItems) {
+        this.billboardSubItems = billboardSubItems;
     }
 
-    public ArrayList<String> getComingDestinations() {
-        return comingDestinations;
+    public boolean isOpen() {
+        return isOpen;
     }
 
-    public void setComingDestinations(ArrayList<String> comingDestinations) {
-        this.comingDestinations = comingDestinations;
-    }
-
-    public ArrayList<String> getComingDisplayTimes() {
-        return comingDisplayTimes;
-    }
-
-    public void setComingDisplayTimes(ArrayList<String> comingDisplayTimes) {
-        this.comingDisplayTimes = comingDisplayTimes;
+    public void setOpen(boolean open) {
+        isOpen = open;
     }
 }

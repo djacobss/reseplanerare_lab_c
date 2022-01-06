@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (savedInstanceState == null && intent.getSerializableExtra("AppData") == null) {
             RealTimeBillBoardFragment realTimeBillBoardFragment = RealTimeBillBoardFragment.newInstance(model.getFavouriteStationInts());
+            realTimeBillBoardFragment.setModel(model);
             FragmentManager fragmentManagerBillboard = getSupportFragmentManager();
             FragmentTransaction transactionBillboard = fragmentManagerBillboard.beginTransaction();
             transactionBillboard.replace(R.id.fragment_container, realTimeBillBoardFragment, "REALTIME_BILLBOARD_FRAGMENT").commit();
@@ -68,7 +69,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_realTime_BillBoard:
+                for (String s : model.getFavouriteStationStrings()) {
+                    Log.e("In Main: ", "Fav Station String in Model: " + model.getFavouriteStationStrings() + ", Size: " + model.getAppData().getFavouriteStations().size());
+                }
                 RealTimeBillBoardFragment realTimeBillBoardFragment = RealTimeBillBoardFragment.newInstance(model.getFavouriteStationInts());
+                realTimeBillBoardFragment.setModel(model);
                 FragmentManager fragmentManagerBillboard = getSupportFragmentManager();
                 FragmentTransaction transactionBillboard = fragmentManagerBillboard.beginTransaction();
                 transactionBillboard.replace(R.id.fragment_container, realTimeBillBoardFragment, "REALTIME_BILLBOARD_FRAGMENT").commit();
@@ -155,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch ((ReturnToFragment) getIntent().getSerializableExtra("Fragment")){
             case REALTIME_BILLBOARD:
                 RealTimeBillBoardFragment realTimeBillBoardFragment = RealTimeBillBoardFragment.newInstance(model.getFavouriteStationInts());
+                realTimeBillBoardFragment.setModel(model);
                 FragmentManager fragmentManagerBillboard = getSupportFragmentManager();
                 FragmentTransaction transactionBillboard = fragmentManagerBillboard.beginTransaction();
                 transactionBillboard.replace(R.id.fragment_container, realTimeBillBoardFragment, "REALTIME_BILLBOARD_FRAGMENT").commit();

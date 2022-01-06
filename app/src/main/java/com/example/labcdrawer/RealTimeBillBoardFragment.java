@@ -3,11 +3,15 @@ package com.example.labcdrawer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import java.util.ArrayList;
 
@@ -46,6 +50,12 @@ public class RealTimeBillBoardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_real_time_bill_board, container, false);
+        model.setBillBoardFragment(this);
+        recyclerView = view.findViewById(R.id.realTimeBillboardRecyclerView);
+        layoutManager = new LinearLayoutManager(view.getContext());
+        for (String s : model.getFavouriteStationStrings()) {
+            Log.e("Test in fragment: ", s);
+        }
         BillboardDataFetcher.getBillboardJSONData(model.getFavouriteStationStrings(),view.getContext(),model);
         return view;
     }
@@ -55,6 +65,8 @@ public class RealTimeBillBoardFragment extends Fragment {
     }
 
     public void showResults(ArrayList<BillboardItem> billboardItems){
-
+        adapter = new RecyclerBillboardAdapter(billboardItems, getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
     }
 }
