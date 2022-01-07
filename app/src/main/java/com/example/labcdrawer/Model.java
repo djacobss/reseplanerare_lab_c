@@ -18,9 +18,11 @@ public class Model {
     private RealTimeSearchFragment searchFragment;
     private StationRealTimeActivity stationRealTimeActivity;
     private RealTimeBillBoardFragment billBoardFragment;
+    private TripsSearchFragment tripsSearchFragment;
     private ArrayList<JSONObject> billboardObjectContainer;
     private ArrayList<Integer> billboardSiteIDContainer;
     public static final String FILE_NAME = "travelApp.dat";
+    private TripsTimeChoice timeChoice;
 
     public Model() {
         appData = new AppData();
@@ -197,5 +199,26 @@ public class Model {
         } catch (IOException | ClassNotFoundException e) {
             return false;
         }
+    }
+
+    public TripsSearchFragment getTripsSearchFragment() {
+        return tripsSearchFragment;
+    }
+
+    public void setTripsSearchFragment(TripsSearchFragment tripsSearchFragment) {
+        this.tripsSearchFragment = tripsSearchFragment;
+    }
+
+    public void stationTripSearchDataReceived(JSONObject response) {
+        ArrayList<LocationItem> searchResultList = SearchStationParser.parseStationData(response);
+        tripsSearchFragment.showStationResults(searchResultList);
+    }
+
+    public TripsTimeChoice getTimeChoice() {
+        return timeChoice;
+    }
+
+    public void setTimeChoice(TripsTimeChoice timeChoice) {
+        this.timeChoice = timeChoice;
     }
 }

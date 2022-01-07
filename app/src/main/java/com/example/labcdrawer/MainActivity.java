@@ -129,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_trips_search:
                 TripsSearchFragment tripsSearchFragment = TripsSearchFragment.newInstance();
+                tripsSearchFragment.setModel(model);
                 FragmentManager fragmentManagerSearchT = getSupportFragmentManager();
                 FragmentTransaction transactionSearchT = fragmentManagerSearchT.beginTransaction();
                 transactionSearchT.replace(R.id.fragment_container, tripsSearchFragment, "TRIPS_SEARCH_FRAGMENT").commit();
@@ -208,6 +209,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case TRIPS_SEARCH:
                 TripsSearchFragment tripsSearchFragment = TripsSearchFragment.newInstance();
+                tripsSearchFragment.setModel(model);
                 FragmentManager fragmentManagerSearchT = getSupportFragmentManager();
                 FragmentTransaction transactionSearchT = fragmentManagerSearchT.beginTransaction();
                 transactionSearchT.replace(R.id.fragment_container, tripsSearchFragment, "TRIPS_SEARCH_FRAGMENT").commit();

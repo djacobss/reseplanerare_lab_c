@@ -6,29 +6,13 @@ import java.util.Date;
 
 public class TripItem implements Serializable {
 
-    private String startStation, endStation, startTime, endTime;
+    private String startTime, endTime, desiredStartTime, desiredEndTime;
+    private LocationItem endLocation, startLocation;
     private ArrayList<String> lineList, startLocations, endLocations, startTimes, endTimes;
     private Date travelTime;
-    private TripsTimeChoice timeChoice;   //if arriveAtDate is true, then the user wishes to arrive at the specified time. Otherwise they wish to start travelling then.
 
     public TripItem(){
-        timeChoice = TripsTimeChoice.NOW;
-    }
 
-    public String getStartStation() {
-        return startStation;
-    }
-
-    public void setStartStation(String startStation) {
-        this.startStation = startStation;
-    }
-
-    public String getEndStation() {
-        return endStation;
-    }
-
-    public void setEndStation(String endStation) {
-        this.endStation = endStation;
     }
 
     public String getStartTime() {
@@ -95,11 +79,36 @@ public class TripItem implements Serializable {
         this.travelTime = travelTime;
     }
 
-    public TripsTimeChoice getTimeChoice() {
-        return timeChoice;
+    public LocationItem getEndLocation() {
+        return endLocation;
     }
 
-    public void setTimeChoice(TripsTimeChoice timeChoice) {
-        this.timeChoice = timeChoice;
+    public void setEndLocation(LocationItem endLocation) {
+        this.endLocation = endLocation;
+    }
+
+    public LocationItem getStartLocation() {
+        return startLocation;
+    }
+
+    public void setStartLocation(LocationItem startLocation) {
+        this.startLocation = startLocation;
+    }
+
+
+    public String getDesiredStartTime() {
+        return desiredStartTime;
+    }
+
+    public void setDesiredStartTime(String desiredStartTime) {
+        this.desiredStartTime = desiredStartTime;
+    }
+
+    public String getDesiredEndTime() {
+        return desiredEndTime;
+    }
+
+    public void setDesiredEndTime(String desiredEndTime) {
+        this.desiredEndTime = desiredEndTime;
     }
 }

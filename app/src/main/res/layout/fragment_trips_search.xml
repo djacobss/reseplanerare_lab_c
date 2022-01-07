@@ -30,19 +30,19 @@
 
 
             <EditText
-                android:id="@+id/tripsSearchTop"
+                android:id="@+id/tripsSearchStart"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
                 android:layout_weight="0.4"
                 android:background="@android:color/white"
                 android:elevation="5dp"
-                android:hint="Ange Startpunkt"
+                android:hint="Ange Startstation"
                 android:padding="7dp"
                 android:textSize="15sp" />
 
             <EditText
-                android:id="@+id/tripsSearchBottom"
+                android:id="@+id/tripsSearchEnd"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
@@ -61,7 +61,9 @@
                 android:backgroundTint="#071F4B"
                 android:drawableLeft="@drawable/ic_search_white"
                 android:text="Sök"
-                android:textColor="@android:color/white" />
+                android:textSize="11sp"
+                android:textColor="@android:color/white"
+                android:layout_marginVertical="10dp"/>
 
 
         </LinearLayout>
@@ -114,13 +116,12 @@
             </RadioGroup>
 
             <EditText
-                android:layout_width="75dp"
+                android:id="@+id/tripsSearchChooseTime"
+                android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:layout_margin="5dp"
                 android:background="#071F4B"
                 android:gravity="center"
                 android:hint="Ange tid"
-                android:padding="5dp"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white"
                 android:textSize="11sp" />
@@ -137,7 +138,7 @@
         android:background="#93A2C8"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/tripsSearchRecyclerView"
+        app:layout_constraintBottom_toTopOf="@id/tripsAddFavouriteTripLL"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tripsSearchTopConstraint">
@@ -171,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="Fenixvägen (Danderyd)"
+                    android:text="Sök för att välja"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textSize="10dp"
@@ -210,7 +211,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="Fenixvägen (Danderyd)"
+                    android:text="Sök för att välja"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textSize="10dp"
@@ -222,6 +223,20 @@
 
     </LinearLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tripsAddFavouriteTripLL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/tripsSearchBottomLinearLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tripsSearchRecyclerView">
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tripsSearchRecyclerView"
         android:layout_width="match_parent"
@@ -230,7 +245,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tripsSearchBottomLinearLayout"/>
+        app:layout_constraintTop_toBottomOf="@+id/tripsAddFavouriteTripLL"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
