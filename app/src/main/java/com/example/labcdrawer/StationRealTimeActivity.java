@@ -35,13 +35,15 @@ public class StationRealTimeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_station_real_time);
 
-        currentItem = (LocationItem) getIntent().getSerializableExtra("Item");
-        appData = (AppData) getIntent().getSerializableExtra("AppData");
-        returnToFragment = (ReturnToFragment) getIntent().getSerializableExtra("Fragment");
-        model = new Model();
-        model.setAppData(appData);
-        model.setStationRealTimeActivity(this);
 
+        model = new Model();
+        if (savedInstanceState == null) {
+            currentItem = (LocationItem) getIntent().getSerializableExtra("Item");
+            appData = (AppData) getIntent().getSerializableExtra("AppData");
+            returnToFragment = (ReturnToFragment) getIntent().getSerializableExtra("Fragment");
+            model.setAppData(appData);
+            model.setStationRealTimeActivity(this);
+        }
         lastUpdated = findViewById(R.id.realTimeStationLastUpdatedText);
 
         toolbar = findViewById(R.id.toolbarStationRealTime);
@@ -68,6 +70,8 @@ public class StationRealTimeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.realTimeUpdateItem:
+                RealTimeDataFetcher.getJSONRealTimeData(Integer.toString(currentItem.getSiteID()), this, model);
             case R.id.transportModeBusItem:
                 model.getAppData().setRealTimeTransportMode(TransportMode.BUS);
                 RealTimeDataFetcher.getJSONRealTimeData(Integer.toString(currentItem.getSiteID()), this, model);
@@ -112,5 +116,11 @@ public class StationRealTimeActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
 
+    }
+
+    @Override
+    protected void onPause() {
+        model.save();
+        super.onPause();
     }
 }

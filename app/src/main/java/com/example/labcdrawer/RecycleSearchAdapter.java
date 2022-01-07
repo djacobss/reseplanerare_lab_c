@@ -87,9 +87,7 @@ public class RecycleSearchAdapter extends RecyclerView.Adapter<RecycleSearchAdap
         holder.getSearchResultTextView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("Test: ", "In Adapter Click");
                 if (itemClickListenerName != null) {
-                    Log.e("Test: ", "In Adapter Click");
                     itemClickListenerName.onItemNameClick(currentItem);
                 }
             }

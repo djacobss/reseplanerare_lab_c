@@ -12,9 +12,6 @@ import java.util.ArrayList;
 
 public class TripsSearchFragment extends Fragment {
 
-    private static final String STATION_LIST_START = "stationListStart";
-    private static final String STATION_LIST_END = "stationListEnd";
-
     private ArrayList<Integer> stationListStart;
     private ArrayList<Integer> stationListEnd;
 
@@ -23,11 +20,9 @@ public class TripsSearchFragment extends Fragment {
 
     }
 
-    public static TripsSearchFragment newInstance(ArrayList<Integer> startStations, ArrayList<Integer> endStations) {
+    public static TripsSearchFragment newInstance() {
         TripsSearchFragment fragment = new TripsSearchFragment();
         Bundle args = new Bundle();
-        args.putIntegerArrayList(STATION_LIST_START, startStations);
-        args.putIntegerArrayList(STATION_LIST_END, endStations);
         fragment.setArguments(args);
         return fragment;
     }
@@ -36,8 +31,7 @@ public class TripsSearchFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            stationListStart = getArguments().getIntegerArrayList(STATION_LIST_START);
-            stationListEnd = getArguments().getIntegerArrayList(STATION_LIST_END);
+            setHasOptionsMenu(false);
         }
     }
 

@@ -18,7 +18,7 @@ public class StationDataFetcher {
                     model.stationSearchDataReceived(response);
                 },
                 error -> {
-                    model.errorInStationSearchResponse(error);
+                    model.timeOutErrorMsg();
                     error.printStackTrace();
                 });
         jsonObjectRequest.setShouldCache(false);

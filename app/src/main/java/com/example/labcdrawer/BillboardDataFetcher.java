@@ -26,7 +26,7 @@ public class BillboardDataFetcher {
                     error -> {
                         error.printStackTrace();
                         Log.e("Error: ","Data Fetching failed");
-                        //TODO: error MSG
+                        model.timeOutErrorMsg();
                     });
             jsonObjectRequest.setShouldCache(false);
             Volley.newRequestQueue(context).add(jsonObjectRequest);

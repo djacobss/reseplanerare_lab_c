@@ -26,7 +26,7 @@ public class RealTimeParser {
                         tempObject.getString("Destination"),
                         tempObject.getString("DisplayTime"),
                         tempObject.getString("TransportMode"),
-                        Integer.parseInt(tempObject.getString("LineNumber"))
+                        tempObject.getString("LineNumber")
                 );
                 tempList.add(newItem);
             }

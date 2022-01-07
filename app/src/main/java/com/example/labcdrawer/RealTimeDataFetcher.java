@@ -17,7 +17,7 @@ public class RealTimeDataFetcher {
                     model.realTimeDataReceived(response);
                 },
                 error -> {
-                    model.errorInRealTimeResponse(error);
+                    model.timeOutErrorMsg();
                     error.printStackTrace();
                 });
         jsonObjectRequest.setShouldCache(false);

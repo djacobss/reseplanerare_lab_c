@@ -7,13 +7,13 @@ import java.util.List;
 public class AppData implements Serializable {
 
     private ArrayList<LocationItem> favouriteStations;
-    private ArrayList<Trip> favouriteTrips;
+    private ArrayList<TripItem> favouriteTripItems;
     private String lastUpdatedRealTime, lastSearchString;
     private TransportMode realTimeTransportMode;
 
     public AppData() {
         favouriteStations = new ArrayList<>();
-        favouriteTrips = new ArrayList<>();
+        favouriteTripItems = new ArrayList<>();
         realTimeTransportMode = TransportMode.BUS;
     }
 
@@ -25,12 +25,12 @@ public class AppData implements Serializable {
         this.favouriteStations = favouriteStations;
     }
 
-    public List<Trip> getFavouriteTrips() {
-        return favouriteTrips;
+    public List<TripItem> getFavouriteTrips() {
+        return favouriteTripItems;
     }
 
-    public void setFavouriteTrips(ArrayList<Trip> favouriteTrips) {
-        this.favouriteTrips = favouriteTrips;
+    public void setFavouriteTrips(ArrayList<TripItem> favouriteTripItems) {
+        this.favouriteTripItems = favouriteTripItems;
     }
 
     public boolean addFavouriteStation(LocationItem station) {
@@ -43,11 +43,11 @@ public class AppData implements Serializable {
         return true;
     }
 
-    public boolean addFavouriteTrip(Trip trip) {
-        if (favouriteTrips.contains(trip)) {
+    public boolean addFavouriteTrip(TripItem tripItem) {
+        if (favouriteTripItems.contains(tripItem)) {
             return false;
         } else {
-            favouriteTrips.add(trip);
+            favouriteTripItems.add(tripItem);
             return true;
         }
     }
@@ -63,9 +63,9 @@ public class AppData implements Serializable {
         return false;
     }
 
-    public boolean removeFavouriteTrip(Trip trip) {
-        if (favouriteTrips.contains(trip)) {
-            favouriteTrips.remove(trip);
+    public boolean removeFavouriteTrip(TripItem tripItem) {
+        if (favouriteTripItems.contains(tripItem)) {
+            favouriteTripItems.remove(tripItem);
             return true;
         } else {
             return false;
@@ -95,4 +95,5 @@ public class AppData implements Serializable {
     public void setLastSearchString(String leastSearchString) {
         this.lastSearchString = leastSearchString;
     }
+
 }

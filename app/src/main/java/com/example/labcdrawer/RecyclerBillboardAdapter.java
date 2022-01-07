@@ -97,6 +97,7 @@ public class RecyclerBillboardAdapter extends RecyclerView.Adapter<RecyclerBillb
 
         boolean isExpanded = currentItem.isOpen();
         holder.getExpandableLayout().setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+        holder.getArrowView().setImageResource(isExpanded ? R.drawable.ic_baseline_keyboard_arrow_down_24 : R.drawable.ic_baseline_keyboard_arrow_up_24);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(
                 holder.getSubRecyclerView().getContext(),
@@ -111,6 +112,7 @@ public class RecyclerBillboardAdapter extends RecyclerView.Adapter<RecyclerBillb
         holder.getCardView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                holder.getArrowView().setImageResource(isExpanded ? R.drawable.ic_baseline_keyboard_arrow_down_24 : R.drawable.ic_baseline_keyboard_arrow_up_24);
                 currentItem.setOpen(!currentItem.isOpen());
                 notifyItemChanged(holder.getAbsoluteAdapterPosition());
             }

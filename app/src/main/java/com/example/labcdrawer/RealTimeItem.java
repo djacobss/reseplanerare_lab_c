@@ -2,29 +2,28 @@ package com.example.labcdrawer;
 
 public class RealTimeItem {
 
-    private String busDestination, timeLeft, transportMode;
-    private int lineNumber;
+    private String busDestination, timeLeft, transportMode, lineNumber;
 
     public RealTimeItem() {
 
     }
 
-    public RealTimeItem(String busDestination, String timeLeft, String transportMode,int lineNumber) {
+    public RealTimeItem(String busDestination, String timeLeft, String transportMode, String lineNumber) {
         this.lineNumber = lineNumber;
         this.busDestination = busDestination;
         this.transportMode = transportMode;
         this.timeLeft = timeLeft;
     }
 
-    public int getLineNumber() {
+    public String getLineNumber() {
         return lineNumber;
     }
 
-    public String getLineNumberString(){
-        return Integer.toString(lineNumber);
+    public String getLineNumberString() {
+        return lineNumber;
     }
 
-    public void setLineNumber(int lineNumber) {
+    public void setLineNumber(String lineNumber) {
         this.lineNumber = lineNumber;
     }
 
@@ -44,8 +43,8 @@ public class RealTimeItem {
         this.timeLeft = timeLeft;
     }
 
-    public TransportMode transportModeConverter(){
-        switch (transportMode){
+    public TransportMode transportModeConverter() {
+        switch (transportMode) {
             case "BUS":
                 return TransportMode.BUS;
             case "METRO":

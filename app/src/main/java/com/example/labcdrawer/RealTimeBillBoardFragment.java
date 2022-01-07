@@ -2,12 +2,16 @@ package com.example.labcdrawer;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -43,6 +47,7 @@ public class RealTimeBillBoardFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             stationList = getArguments().getIntegerArrayList(STATION_LIST);
+            setHasOptionsMenu(true);
         }
     }
 
@@ -68,5 +73,19 @@ public class RealTimeBillBoardFragment extends Fragment {
         adapter = new RecyclerBillboardAdapter(billboardItems, getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.billboard_refresh_menu,menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.billboardOptionsItemRefresh){
+            BillboardDataFetcher.getBillboardJSONData(model.getFavouriteStationStrings(),getView().getContext(),model);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

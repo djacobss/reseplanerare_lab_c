@@ -2,6 +2,7 @@ package com.example.labcdrawer;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -9,13 +10,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.TextAppearanceSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -40,12 +45,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         model.setMainActivity(this);
 
         Intent intent = getIntent();
-        if((AppData) intent.getSerializableExtra("AppData") != null){
+        if ((AppData) intent.getSerializableExtra("AppData") != null) {
             model.setAppData((AppData) intent.getSerializableExtra("AppData"));
             returnToFragment();
         }
 
         if (savedInstanceState == null && intent.getSerializableExtra("AppData") == null) {
+            model.load();
             RealTimeBillBoardFragment realTimeBillBoardFragment = RealTimeBillBoardFragment.newInstance(model.getFavouriteStationInts());
             realTimeBillBoardFragment.setModel(model);
             FragmentManager fragmentManagerBillboard = getSupportFragmentManager();
@@ -54,6 +60,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(R.id.nav_realTime_BillBoard);
         }
 
+    }
+
+    @Override
+    protected void onStart() {
+        if (model.load()) {
+
+        }
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        if (!isConnected()) {
+            connectionErrorPopup();
+        }
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        model.save();
+        super.onPause();
     }
 
     @Override
@@ -69,9 +97,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_realTime_BillBoard:
-                for (String s : model.getFavouriteStationStrings()) {
-                    Log.e("In Main: ", "Fav Station String in Model: " + model.getFavouriteStationStrings() + ", Size: " + model.getAppData().getFavouriteStations().size());
-                }
                 RealTimeBillBoardFragment realTimeBillBoardFragment = RealTimeBillBoardFragment.newInstance(model.getFavouriteStationInts());
                 realTimeBillBoardFragment.setModel(model);
                 FragmentManager fragmentManagerBillboard = getSupportFragmentManager();
@@ -96,21 +121,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 navigationView.setCheckedItem(R.id.nav_realTime_Favourites);
                 break;
             case R.id.nav_trips_showFavs:
-                TripsHomeFragment tripsHomeFragment = TripsHomeFragment.newInstance(model.getFavouriteTripsStartStrings(), model.getFavouriteTripsEndStrings());
+                TripsHomeFragment tripsHomeFragment = TripsHomeFragment.newInstance();
                 FragmentManager fragmentManagerHomeT = getSupportFragmentManager();
                 FragmentTransaction transactionHomeT = fragmentManagerHomeT.beginTransaction();
                 transactionHomeT.replace(R.id.fragment_container, tripsHomeFragment, "TRIPS_HOME_FRAGMENT").commit();
                 navigationView.setCheckedItem(R.id.nav_trips_showFavs);
                 break;
             case R.id.nav_trips_search:
-                TripsSearchFragment tripsSearchFragment = TripsSearchFragment.newInstance(model.getFavouriteTripsStartStrings(), model.getFavouriteTripsEndStrings());
+                TripsSearchFragment tripsSearchFragment = TripsSearchFragment.newInstance();
                 FragmentManager fragmentManagerSearchT = getSupportFragmentManager();
                 FragmentTransaction transactionSearchT = fragmentManagerSearchT.beginTransaction();
                 transactionSearchT.replace(R.id.fragment_container, tripsSearchFragment, "TRIPS_SEARCH_FRAGMENT").commit();
                 navigationView.setCheckedItem(R.id.nav_trips_search);
                 break;
             case R.id.nav_trips_Favourites:
-                TripsFavouriteFragment tripsFavouriteFragment = TripsFavouriteFragment.newInstance(model.getFavouriteTripsStartStrings(), model.getFavouriteTripsEndStrings());
+                TripsFavouriteFragment tripsFavouriteFragment = TripsFavouriteFragment.newInstance();
                 FragmentManager fragmentManagerFavT = getSupportFragmentManager();
                 FragmentTransaction transactionFavT = fragmentManagerFavT.beginTransaction();
                 transactionFavT.replace(R.id.fragment_container, tripsFavouriteFragment, "TRIPS_FAVOURITE_FRAGMENT").commit();
@@ -155,9 +180,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    private void returnToFragment(){
-        Log.e("Test: ", "In returnToFragment start");
-        switch ((ReturnToFragment) getIntent().getSerializableExtra("Fragment")){
+    private void returnToFragment() {
+        switch ((ReturnToFragment) getIntent().getSerializableExtra("Fragment")) {
             case REALTIME_BILLBOARD:
                 RealTimeBillBoardFragment realTimeBillBoardFragment = RealTimeBillBoardFragment.newInstance(model.getFavouriteStationInts());
                 realTimeBillBoardFragment.setModel(model);
@@ -167,7 +191,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 navigationView.setCheckedItem(R.id.nav_realTime_BillBoard);
                 break;
             case REALTIME_SEARCH:
-                Log.e("Test: ","In returnToFragment in case");
                 RealTimeSearchFragment realTimeSearchFragment = RealTimeSearchFragment.newInstance(model.getFavouriteStationInts());
                 realTimeSearchFragment.setModel(model);
                 realTimeSearchFragment.setSearchFromStart(true);
@@ -177,14 +200,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 navigationView.setCheckedItem(R.id.nav_realTime_Search);
                 break;
             case TRIPS_HOME:
-                TripsHomeFragment tripsHomeFragment = TripsHomeFragment.newInstance(model.getFavouriteTripsStartStrings(), model.getFavouriteTripsEndStrings());
+                TripsHomeFragment tripsHomeFragment = TripsHomeFragment.newInstance();
                 FragmentManager fragmentManagerHomeT = getSupportFragmentManager();
                 FragmentTransaction transactionHomeT = fragmentManagerHomeT.beginTransaction();
                 transactionHomeT.replace(R.id.fragment_container, tripsHomeFragment, "TRIPS_HOME_FRAGMENT").commit();
                 navigationView.setCheckedItem(R.id.nav_trips_showFavs);
                 break;
             case TRIPS_SEARCH:
-                TripsSearchFragment tripsSearchFragment = TripsSearchFragment.newInstance(model.getFavouriteTripsStartStrings(), model.getFavouriteTripsEndStrings());
+                TripsSearchFragment tripsSearchFragment = TripsSearchFragment.newInstance();
                 FragmentManager fragmentManagerSearchT = getSupportFragmentManager();
                 FragmentTransaction transactionSearchT = fragmentManagerSearchT.beginTransaction();
                 transactionSearchT.replace(R.id.fragment_container, tripsSearchFragment, "TRIPS_SEARCH_FRAGMENT").commit();
@@ -195,4 +218,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    public void showTimeoutToast() {
+        Toast.makeText(this, "Timeout Error", Toast.LENGTH_LONG).show();
+    }
+
+    public void connectionErrorPopup() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Ingen Anslutning");
+        alertDialogBuilder.setMessage("Koppla upp dig till internet innan du kan fortsätta");
+        alertDialogBuilder.setCancelable(false);
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    public boolean isConnected() {  //Checks for internet connection
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo wifiNetwork = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        if (wifiNetwork != null && wifiNetwork.isConnected()) {
+            return true;
+        }
+
+        NetworkInfo mobileNetwork = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if (mobileNetwork != null && mobileNetwork.isConnected()) {
+            return true;
+        }
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if (activeNetwork != null && activeNetwork.isConnected()) {
+            return true;
+        }
+
+        return false;
+    }
 }

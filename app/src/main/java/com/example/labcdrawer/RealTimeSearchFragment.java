@@ -54,6 +54,7 @@ public class RealTimeSearchFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             stationList = getArguments().getIntegerArrayList(STATION_LIST);
+            setHasOptionsMenu(false);
         }
     }
 
@@ -78,10 +79,10 @@ public class RealTimeSearchFragment extends Fragment {
             @Override
             public void onItemNameClick(LocationItem locationItem) {
                 Log.e("Test: ", "In click");
-                Intent intent = new Intent(getActivity(),StationRealTimeActivity.class);
-                intent.putExtra("Item",(Serializable) locationItem);
-                intent.putExtra("AppData",(Serializable) model.getAppData());
-                intent.putExtra("Fragment",(Serializable) ReturnToFragment.REALTIME_SEARCH);
+                Intent intent = new Intent(getActivity(), StationRealTimeActivity.class);
+                intent.putExtra("Item", (Serializable) locationItem);
+                intent.putExtra("AppData", (Serializable) model.getAppData());
+                intent.putExtra("Fragment", (Serializable) ReturnToFragment.REALTIME_SEARCH);
                 startActivity(intent);
             }
         });
@@ -118,8 +119,8 @@ public class RealTimeSearchFragment extends Fragment {
                 }
             }
         });
-        if(searchFromStart){
-            StationDataFetcher.getJSONStationData(model.getAppData().getLastSearchString(),view.getContext(),model);
+        if (searchFromStart) {
+            StationDataFetcher.getJSONStationData(model.getAppData().getLastSearchString(), view.getContext(), model);
         }
         return view;
     }
@@ -134,14 +135,6 @@ public class RealTimeSearchFragment extends Fragment {
 
     public void setModel(Model model) {
         this.model = model;
-    }
-
-    public void searchTimeOutError() {
-        Toast.makeText(getContext(), "Ingen Anslutning", Toast.LENGTH_LONG).show();
-    }
-
-    public void wrongInputError() {
-        Toast.makeText(getContext(), "Inga Resultat", Toast.LENGTH_LONG).show();
     }
 
     public void showResults(ArrayList<LocationItem> searchResultList) {
@@ -160,10 +153,10 @@ public class RealTimeSearchFragment extends Fragment {
         }, new RecycleSearchAdapter.ItemClickListenerName() {
             @Override
             public void onItemNameClick(LocationItem locationItem) {
-                Intent intent = new Intent(getActivity(),StationRealTimeActivity.class);
-                intent.putExtra("Item",(Serializable) locationItem);
-                intent.putExtra("AppData",(Serializable) model.getAppData());
-                intent.putExtra("Fragment",(Serializable) ReturnToFragment.REALTIME_SEARCH);
+                Intent intent = new Intent(getActivity(), StationRealTimeActivity.class);
+                intent.putExtra("Item", (Serializable) locationItem);
+                intent.putExtra("AppData", (Serializable) model.getAppData());
+                intent.putExtra("Fragment", (Serializable) ReturnToFragment.REALTIME_SEARCH);
                 startActivity(intent);
             }
         });
@@ -176,4 +169,5 @@ public class RealTimeSearchFragment extends Fragment {
     public void setSearchFromStart(boolean searchFromStart) {
         this.searchFromStart = searchFromStart;
     }
+
 }

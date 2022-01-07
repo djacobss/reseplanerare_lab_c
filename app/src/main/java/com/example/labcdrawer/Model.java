@@ -2,14 +2,13 @@ package com.example.labcdrawer;
 
 import android.util.Log;
 
-import com.android.volley.NoConnectionError;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
-
 import org.json.JSONObject;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class Model {
@@ -21,6 +20,7 @@ public class Model {
     private RealTimeBillBoardFragment billBoardFragment;
     private ArrayList<JSONObject> billboardObjectContainer;
     private ArrayList<Integer> billboardSiteIDContainer;
+    public static final String FILE_NAME = "travelApp.dat";
 
     public Model() {
         appData = new AppData();
@@ -46,34 +46,14 @@ public class Model {
         return stationStringList;
     }
 
-    public ArrayList<String> getFavouriteStationStrings(){
+    public ArrayList<String> getFavouriteStationStrings() {
         ArrayList<String> stringArrayList = new ArrayList<>();
-        if(!appData.getFavouriteStations().isEmpty()){
+        if (!appData.getFavouriteStations().isEmpty()) {
             for (LocationItem station : appData.getFavouriteStations()) {
                 stringArrayList.add(Integer.toString(station.getSiteID()));
             }
         }
         return stringArrayList;
-    }
-
-    public ArrayList<Integer> getFavouriteTripsStartStrings() {
-        ArrayList<Integer> tripsStartList = new ArrayList<>();
-        if (!appData.getFavouriteTrips().isEmpty()) {
-            for (Trip trip : appData.getFavouriteTrips()) {
-                tripsStartList.add(trip.getStartStation().getSiteID());
-            }
-        }
-        return tripsStartList;
-    }
-
-    public ArrayList<Integer> getFavouriteTripsEndStrings() {
-        ArrayList<Integer> tripsEndList = new ArrayList<>();
-        if (!appData.getFavouriteTrips().isEmpty()) {
-            for (Trip trip : appData.getFavouriteTrips()) {
-                tripsEndList.add(trip.getEndStation().getSiteID());
-            }
-        }
-        return tripsEndList;
     }
 
     public void stationSearchDataReceived(JSONObject response) {
@@ -90,13 +70,6 @@ public class Model {
         searchFragment.showResults(searchResultList);
     }
 
-    public void errorInStationSearchResponse(VolleyError error) {
-        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-            searchFragment.searchTimeOutError();
-        } else {
-            searchFragment.wrongInputError();
-        }
-    }
 
     public void setMainActivity(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
@@ -138,22 +111,20 @@ public class Model {
 
     public void realTimeDataReceived(JSONObject response) {
         RealTimeParser realTimeParser = new RealTimeParser();
-        ArrayList<RealTimeItem> tempList = realTimeParser.parseRealTimeData(response,this);
+        ArrayList<RealTimeItem> tempList = realTimeParser.parseRealTimeData(response, this);
         stationRealTimeActivity.showResults(tempList);
     }
 
-    public void errorInRealTimeResponse(VolleyError error) {
-    }
 
     public void setLastUpdatedRealTime(String latestUpdate) {
-        latestUpdate = latestUpdate.substring(0,Math.min(latestUpdate.length(),16));
+        latestUpdate = latestUpdate.substring(0, Math.min(latestUpdate.length(), 16));
         StringBuilder builder = new StringBuilder(latestUpdate);
-        builder.setCharAt(10,' ');
-        builder.insert(0,"Senast Uppdaterat: ");
+        builder.setCharAt(10, ' ');
+        builder.insert(0, "Senast Uppdaterat: ");
         appData.setLastUpdatedRealTime(builder.toString());
     }
 
-    public String getLastUpdatedRealTime(){
+    public String getLastUpdatedRealTime() {
         return appData.getLastUpdatedRealTime();
     }
 
@@ -174,7 +145,7 @@ public class Model {
     }
 
     public void billboardDataReceived(ArrayList<JSONObject> objects, ArrayList<Integer> siteIDs) {
-        ArrayList<BillboardItem> billboardItems = BillboardParser.parseBillboardJSON(objects,this, siteIDs);
+        ArrayList<BillboardItem> billboardItems = BillboardParser.parseBillboardJSON(objects, this, siteIDs);
         billboardObjectContainer.clear();
         billboardSiteIDContainer.clear();
         billBoardFragment.showResults(billboardItems);
@@ -188,14 +159,43 @@ public class Model {
         this.billBoardFragment = billBoardFragment;
     }
 
-    public void waitForResponses(JSONObject object, int size, int siteID){
+    public void waitForResponses(JSONObject object, int size, int siteID) {
         billboardObjectContainer.add(object);
         billboardSiteIDContainer.add(siteID);
         for (Integer i : billboardSiteIDContainer) {
             Log.e("Test in Model 1: ", "OB container: " + billboardObjectContainer.size() + "SiteID Container: " + billboardSiteIDContainer.size());
         }
-        if(billboardObjectContainer.size() == size){
+        if (billboardObjectContainer.size() == size) {
             billboardDataReceived(billboardObjectContainer, billboardSiteIDContainer);
+        }
+    }
+
+    public void timeOutErrorMsg() {
+        mainActivity.showTimeoutToast();
+    }
+
+    public void save() {
+        try {
+            FileOutputStream fos = mainActivity.openFileOutput(FILE_NAME, mainActivity.MODE_PRIVATE);
+            ObjectOutputStream os = new ObjectOutputStream(fos);
+            os.writeObject(appData);
+            os.close();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean load() {
+        try {
+            FileInputStream fis = mainActivity.openFileInput(FILE_NAME);
+            ObjectInputStream is = new ObjectInputStream(fis);
+            appData = (AppData) is.readObject();
+            is.close();
+            fis.close();
+            return true;
+        } catch (IOException | ClassNotFoundException e) {
+            return false;
         }
     }
 }

@@ -41,6 +41,7 @@ public class RealTimeFavouriteFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             stationList = getArguments().getIntegerArrayList(STATION_LIST);
+            setHasOptionsMenu(false);
         }
     }
 

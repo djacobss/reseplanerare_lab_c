@@ -16,7 +16,7 @@ public class RecyclerStationAdapter extends RecyclerView.Adapter<RecyclerStation
     private ArrayList<RealTimeItem> realTimeItems;
     private Context context;
 
-    public static class RecyclerStationViewHolder extends RecyclerView.ViewHolder{
+    public static class RecyclerStationViewHolder extends RecyclerView.ViewHolder {
 
         private TextView lineTextView;
         private TextView destinationTextView;
@@ -50,7 +50,7 @@ public class RecyclerStationAdapter extends RecyclerView.Adapter<RecyclerStation
     @NonNull
     @Override
     public RecyclerStationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(viewType,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
         RecyclerStationViewHolder recyclerStationViewHolder = new RecyclerStationViewHolder(view);
         return recyclerStationViewHolder;
     }

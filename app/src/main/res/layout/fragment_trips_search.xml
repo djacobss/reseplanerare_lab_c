@@ -4,18 +4,233 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#071F4B"
     tools:context=".TripsSearchFragment">
 
-    <TextView
-        android:id="@+id/textViewSearchT"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tripsSearchTopConstraint"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="T Search"
-        android:textColor="@android:color/black"
-        android:textSize="25sp"
+        android:background="#93A2C8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <LinearLayout
+            android:id="@+id/tripsSearchTopLinearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/tripsSearchRadioLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <EditText
+                android:id="@+id/tripsSearchTop"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:layout_weight="0.4"
+                android:background="@android:color/white"
+                android:elevation="5dp"
+                android:hint="Ange Startpunkt"
+                android:padding="7dp"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/tripsSearchBottom"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:layout_weight="0.4"
+                android:background="@android:color/white"
+                android:elevation="5dp"
+                android:hint="Ange Destination"
+                android:padding="7dp"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/tripsSearchBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:backgroundTint="#071F4B"
+                android:drawableLeft="@drawable/ic_search_white"
+                android:text="Sök"
+                android:textColor="@android:color/white" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tripsSearchRadioLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="5dp"
+            android:paddingBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tripsSearchTopLinearLayout">
+
+            <RadioGroup
+                android:id="@+id/tripsSearchRadioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <RadioButton
+                    android:id="@+id/tripsSearchRadio1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:onClick="checkButton"
+                    android:text="Åk nu" />
+
+                <RadioButton
+                    android:id="@+id/tripsSearchRadio2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:onClick="checkButton"
+                    android:text="Avgång" />
+
+                <RadioButton
+                    android:id="@+id/tripsSearchRadio3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:onClick="checkButton"
+                    android:text="Ankomst" />
+
+
+            </RadioGroup>
+
+            <EditText
+                android:layout_width="75dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="#071F4B"
+                android:gravity="center"
+                android:hint="Ange tid"
+                android:padding="5dp"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/tripsSearchBottomLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#93A2C8"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/tripsSearchRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tripsSearchTopConstraint">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Start:"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:layout_weight="0"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/tripsSearchStartCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:background="@android:color/white"
+                android:elevation="5dp"
+                app:cardCornerRadius="4dp">
+
+                <TextView
+                    android:id="@+id/tripsSearchStartText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="Fenixvägen (Danderyd)"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="10dp"
+                    android:textStyle="bold"/>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Slut:"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:layout_weight="0"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/tripsSearchEndCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:background="@android:color/white"
+                android:elevation="5dp"
+                app:cardCornerRadius="4dp">
+
+                <TextView
+                    android:id="@+id/tripsSearchEndText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="Fenixvägen (Danderyd)"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="10dp"
+                    android:textStyle="bold"/>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tripsSearchRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tripsSearchBottomLinearLayout"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
