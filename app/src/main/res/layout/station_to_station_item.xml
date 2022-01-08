@@ -19,7 +19,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:layout_height="65dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -66,8 +66,9 @@
                     android:background="@drawable/real_time_item_border"
                     android:textColor="@android:color/black"
                     android:textStyle="bold"
+                    android:drawableLeft="@drawable/ic_bustravel"
                     android:text="611"
-                    android:textSize="10sp"
+                    android:textSize="15sp"
                     android:padding="3dp"/>
 
                 <TextView
@@ -76,7 +77,7 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textColor="@android:color/black"
-                    android:textSize="10sp"
+                    android:textSize="15sp"
                     android:text="Täby Kyrkby"
                     android:paddingHorizontal="3dp"/>
 

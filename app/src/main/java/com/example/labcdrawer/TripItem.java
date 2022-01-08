@@ -6,13 +6,26 @@ import java.util.Date;
 
 public class TripItem implements Serializable {
 
-    private String startTime, endTime, desiredStartTime, desiredEndTime;
-    private LocationItem endLocation, startLocation;
-    private ArrayList<String> lineList, startLocations, endLocations, startTimes, endTimes;
-    private Date travelTime;
+    private String startTime, endTime, startDate, endDate;
+    private String endLocationName, startLocationName, startLocationID, endLocationID;
+    private ArrayList<String> lineList, startLocations, endLocations, startTimes, endTimes, lineDirections;
+    private ArrayList<TransportMode> modeOfTravel;
+    private boolean isFavourite, isExpanded;
+    private ArrayList<TripLineItem> tripLineItems;
+    private ArrayList<TripSubItem> tripSubItems;
 
-    public TripItem(){
-
+    public TripItem() {
+        lineList = new ArrayList<>();
+        startLocations = new ArrayList<>();
+        endLocations = new ArrayList<>();
+        startTimes = new ArrayList<>();
+        endTimes = new ArrayList<>();
+        lineDirections = new ArrayList<>();
+        modeOfTravel = new ArrayList<>();
+        tripLineItems = new ArrayList<>();
+        tripSubItems = new ArrayList<>();
+        isFavourite = false;
+        isExpanded = false;
     }
 
     public String getStartTime() {
@@ -71,44 +84,119 @@ public class TripItem implements Serializable {
         this.endTimes = endTimes;
     }
 
-    public Date getTravelTime() {
-        return travelTime;
+    public String getEndLocationName() {
+        return endLocationName;
     }
 
-    public void setTravelTime(Date travelTime) {
-        this.travelTime = travelTime;
+    public void setEndLocationName(String endLocationName) {
+        this.endLocationName = endLocationName;
     }
 
-    public LocationItem getEndLocation() {
-        return endLocation;
+    public String getStartLocationName() {
+        return startLocationName;
     }
 
-    public void setEndLocation(LocationItem endLocation) {
-        this.endLocation = endLocation;
+    public void setStartLocationName(String startLocationName) {
+        this.startLocationName = startLocationName;
     }
 
-    public LocationItem getStartLocation() {
-        return startLocation;
+    public String getStartLocationID() {
+        return startLocationID;
     }
 
-    public void setStartLocation(LocationItem startLocation) {
-        this.startLocation = startLocation;
+    public void setStartLocationID(String startLocationID) {
+        this.startLocationID = startLocationID;
     }
 
-
-    public String getDesiredStartTime() {
-        return desiredStartTime;
+    public String getEndLocationID() {
+        return endLocationID;
     }
 
-    public void setDesiredStartTime(String desiredStartTime) {
-        this.desiredStartTime = desiredStartTime;
+    public void setEndLocationID(String endLocationID) {
+        this.endLocationID = endLocationID;
     }
 
-    public String getDesiredEndTime() {
-        return desiredEndTime;
+    public ArrayList<TransportMode> getModeOfTravel() {
+        return modeOfTravel;
     }
 
-    public void setDesiredEndTime(String desiredEndTime) {
-        this.desiredEndTime = desiredEndTime;
+    public void setModeOfTravel(ArrayList<TransportMode> modeOfTravel) {
+        this.modeOfTravel = modeOfTravel;
+    }
+
+    public ArrayList<String> getLineDirections() {
+        return lineDirections;
+    }
+
+    public void setLineDirections(ArrayList<String> lineDirections) {
+        this.lineDirections = lineDirections;
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public boolean isExpanded() {
+        return isExpanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        isExpanded = expanded;
+    }
+
+    public void setupTripLineItems() {
+        for (int i = 0; i < lineList.size(); i++) {
+            TripLineItem tripLineItem = new TripLineItem(
+                    lineList.get(i),
+                    modeOfTravel.get(i)
+
+            );
+            tripLineItems.add(tripLineItem);
+        }
+    }
+
+    public ArrayList<TripLineItem> getTripLineItems() {
+        return tripLineItems;
+    }
+
+    public void setTripLineItems(ArrayList<TripLineItem> tripLineItems) {
+        this.tripLineItems = tripLineItems;
+    }
+
+    public ArrayList<TripSubItem> getTripSubItems() {
+        return tripSubItems;
+    }
+
+    public void setTripSubItems(ArrayList<TripSubItem> tripSubItems) {
+        this.tripSubItems = tripSubItems;
+    }
+
+    public void setUpSubItems(){
+        for (int i = 0; i < lineList.size(); i++) {
+            TripSubItem tripSubItem = new TripSubItem(startLocations.get(i),
+                    endLocations.get(i), startTimes.get(i), endTimes.get(i),
+                    lineDirections.get(i), lineList.get(i), modeOfTravel.get(i));
+            tripSubItems.add(tripSubItem);
+        }
     }
 }

@@ -4,6 +4,6 @@ import java.io.Serializable;
 
 public enum TransportMode implements Serializable {
 
-    BUS, METRO, TRAIN, TRAM, SHIP
+    BUS, METRO, TRAIN, TRAM, SHIP, WALK
 
 }

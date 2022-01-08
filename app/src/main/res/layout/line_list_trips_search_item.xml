@@ -19,6 +19,7 @@
         android:background="@drawable/real_time_item_border"
         android:textSize="15sp"
         android:textStyle="bold"
+        android:drawableLeft="@drawable/ic_bustravel"
         android:textColor="@android:color/black"
         android:text="611"
         android:padding="5dp"

@@ -5,15 +5,15 @@ import java.util.ArrayList;
 
 public class BillboardItem implements Serializable {
 
-    private String stationName,nextLineNumber,nextDisplayTime;
+    private String stationName, nextLineNumber, nextDisplayTime;
     private ArrayList<BillboardSubItem> billboardSubItems;
     private boolean isOpen;
 
-    public BillboardItem(){
+    public BillboardItem() {
         isOpen = false;
     }
 
-    public BillboardItem(String stationName, String nextLineNumber, String nextDisplayTime, ArrayList<BillboardSubItem> billboardSubItems){
+    public BillboardItem(String stationName, String nextLineNumber, String nextDisplayTime, ArrayList<BillboardSubItem> billboardSubItems) {
         this.stationName = stationName;
         this.nextLineNumber = nextLineNumber;
         this.nextDisplayTime = nextDisplayTime;

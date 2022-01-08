@@ -19,10 +19,12 @@ public class Model {
     private StationRealTimeActivity stationRealTimeActivity;
     private RealTimeBillBoardFragment billBoardFragment;
     private TripsSearchFragment tripsSearchFragment;
+    private String desiredTime, desiredDate;
     private ArrayList<JSONObject> billboardObjectContainer;
     private ArrayList<Integer> billboardSiteIDContainer;
     public static final String FILE_NAME = "travelApp.dat";
     private TripsTimeChoice timeChoice;
+    private String currentStartLocID, currentEndLocID;
 
     public Model() {
         appData = new AppData();
@@ -220,5 +222,42 @@ public class Model {
 
     public void setTimeChoice(TripsTimeChoice timeChoice) {
         this.timeChoice = timeChoice;
+    }
+
+    public String getDesiredTime() {
+        return desiredTime;
+    }
+
+    public void setDesiredTime(String desiredTime) {
+        this.desiredTime = desiredTime;
+    }
+
+    public String getDesiredDate() {
+        return desiredDate;
+    }
+
+    public void setDesiredDate(String desiredDate) {
+        this.desiredDate = desiredDate;
+    }
+
+    public void tripsDataReceived(JSONObject response) {
+        ArrayList<TripItem> tripItems = TripsJSONParser.parseTripsJSON(response, this);
+        tripsSearchFragment.showTripsResults(tripItems);
+    }
+
+    public String getCurrentStartLocID() {
+        return currentStartLocID;
+    }
+
+    public void setCurrentStartLocID(String currentStartLocID) {
+        this.currentStartLocID = currentStartLocID;
+    }
+
+    public String getCurrentEndLocID() {
+        return currentEndLocID;
+    }
+
+    public void setCurrentEndLocID(String currentEndLocID) {
+        this.currentEndLocID = currentEndLocID;
     }
 }
