@@ -58,9 +58,6 @@ public class RealTimeBillBoardFragment extends Fragment {
         model.setBillBoardFragment(this);
         recyclerView = view.findViewById(R.id.realTimeBillboardRecyclerView);
         layoutManager = new LinearLayoutManager(view.getContext());
-        for (String s : model.getFavouriteStationStrings()) {
-            Log.e("Test in fragment: ", s);
-        }
         BillboardDataFetcher.getBillboardJSONData(model.getFavouriteStationStrings(),view.getContext(),model);
         return view;
     }

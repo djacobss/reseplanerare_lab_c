@@ -1,5 +1,7 @@
 package com.example.labcdrawer;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,34 +16,31 @@ public class TripsJSONParser {
             JSONArray tripArray = jsonObject.getJSONArray("Trip");
             for (int i = 0; i < tripArray.length(); i++) {
                 TripItem tripItem = new TripItem();
-                JSONObject legList = tripArray.getJSONObject(i);
+                JSONObject tripObject = tripArray.getJSONObject(i);
+                JSONObject legList = tripObject.getJSONObject("LegList");
                 JSONArray legArray = legList.getJSONArray("Leg");
                 ArrayList<JSONObject> listOfLegInfo = new ArrayList<>();
                 ArrayList<JSONObject> listOfOriginObjects = new ArrayList<>();
                 ArrayList<JSONObject> listOfDestinationObjects = new ArrayList<>();
-                ArrayList<JSONObject> listOfProductObjects = new ArrayList<>();
                 tripItem.setStartLocationID(model.getCurrentStartLocID());
                 tripItem.setEndLocationID(model.getCurrentEndLocID());
                 tripItem.setStartLocationName(legArray.getJSONObject(0).getJSONObject("Origin").getString("name"));
                 tripItem.setStartTime(legArray.getJSONObject(0).getJSONObject("Origin").getString("time").substring(0, 5));
                 tripItem.setStartDate(legArray.getJSONObject(0).getJSONObject("Origin").getString("date"));
                 tripItem.setEndLocationName(legArray.getJSONObject(legArray.length() - 1).getJSONObject("Destination").getString("name"));
-                tripItem.setEndTime(legArray.getJSONObject(legArray.length() - 1).getJSONObject("Origin").getString("time").substring(0, 5));
-                tripItem.setEndDate(legArray.getJSONObject(legArray.length() - 1).getJSONObject("Origin").getString("date"));
+                tripItem.setEndTime(legArray.getJSONObject(legArray.length() - 1).getJSONObject("Destination").getString("time").substring(0, 5));
+                tripItem.setEndDate(legArray.getJSONObject(legArray.length() - 1).getJSONObject("Destination").getString("date"));
                 for (int j = 0; j < legArray.length(); j++) {
                     listOfLegInfo.add(legArray.getJSONObject(j));
                 }
                 for (JSONObject legObject : listOfLegInfo) {
-                    if (legObject.getString("type").equals("WALK")) {
-                        tripItem.getModeOfTravel().add(TransportMode.WALK);
-                        tripItem.getLineDirections().add(legObject.getString("dist") + "m");
-                    } else {
+                    if(!legObject.getString("type").equals("WALK")) {
                         tripItem.getModeOfTravel().add(getTravelMode(legObject));
-                        listOfProductObjects.add(legObject.getJSONObject("Product"));
+                        tripItem.getLineList().add(legObject.getJSONObject("Product").getString("line"));
                         tripItem.getLineDirections().add(legObject.getString("direction"));
+                        listOfOriginObjects.add(legObject.getJSONObject("Origin"));
+                        listOfDestinationObjects.add(legObject.getJSONObject("Destination"));
                     }
-                    listOfOriginObjects.add(legObject.getJSONObject("Origin"));
-                    listOfDestinationObjects.add(legObject.getJSONObject("Destination"));
                 }
                 for (JSONObject originObject : listOfOriginObjects) {
                     tripItem.getStartLocations().add(originObject.getString("name"));
@@ -51,20 +50,15 @@ public class TripsJSONParser {
                     tripItem.getEndLocations().add(destinationObject.getString("name"));
                     tripItem.getEndTimes().add(destinationObject.getString("time").substring(0, 5));
                 }
-                if (!listOfProductObjects.isEmpty()) {
-                    for (JSONObject productObject : listOfProductObjects) {
-                        tripItem.getLineList().add(productObject.getString("line"));
-                    }
-                } else {
-                    tripItem.getLineList().add("Gång");
-                }
                 tripItems.add(tripItem);
             }
         } catch (JSONException e) {
+            //TODO ERROR MSG
             e.printStackTrace();
         }
-
-
+        TripItem testItem = tripItems.get(0);
+        Log.e("Test: ", testItem.getStartLocationName() + ", " + testItem.getEndLocationName() + ", " + testItem.getStartLocations() + ", " + testItem.getEndLocations() + ", "
+         + testItem.getLineList() + ", " + testItem.getStartTimes() + ", " + testItem.getEndTimes() + ", " + testItem.getLineDirections());
         return tripItems;
     }
 

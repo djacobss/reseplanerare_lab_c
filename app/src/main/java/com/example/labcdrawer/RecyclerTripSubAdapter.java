@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ public class RecyclerTripSubAdapter extends RecyclerView.Adapter<RecyclerTripSub
     public static class RecyclerTripSubViewHolder extends RecyclerView.ViewHolder{
 
         private TextView startStation, endStation, startTime, endTime, direction, lineText;
+        private ImageView travelModeImage;
 
         public RecyclerTripSubViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -28,6 +30,7 @@ public class RecyclerTripSubAdapter extends RecyclerView.Adapter<RecyclerTripSub
             endTime = itemView.findViewById(R.id.tripsSubItemSecondTime);
             lineText = itemView.findViewById(R.id.tripsSubItemLineBetween);
             direction = itemView.findViewById(R.id.tripsSibItemLineNameBetween);
+            travelModeImage = itemView.findViewById(R.id.tripsImageS2SLine);
         }
 
         public TextView getStartStation() {
@@ -53,6 +56,10 @@ public class RecyclerTripSubAdapter extends RecyclerView.Adapter<RecyclerTripSub
         public TextView getLineText() {
             return lineText;
         }
+
+        public ImageView getTravelModeImage() {
+            return travelModeImage;
+        }
     }
 
     public RecyclerTripSubAdapter(ArrayList<TripSubItem> itemArrayList, Context context){
@@ -77,7 +84,7 @@ public class RecyclerTripSubAdapter extends RecyclerView.Adapter<RecyclerTripSub
         holder.getEndTime().setText(currentItem.getEndTime());
         holder.getDirection().setText(currentItem.getDirection());
         holder.getLineText().setText(currentItem.getLine());
-        holder.getLineText().setCompoundDrawables(context.getResources().getDrawable(getImageIDFromItem(currentItem)), null, null, null);
+        holder.getTravelModeImage().setImageResource(getImageIDFromItem(currentItem));
     }
 
     @Override

@@ -12,7 +12,6 @@ public class BillboardParser {
 
     public static ArrayList<BillboardItem> parseBillboardJSON(ArrayList<JSONObject> objectArrayList, Model model, ArrayList<Integer> siteIDList) {
         ArrayList<BillboardItem> billboardItems = new ArrayList<>();
-        Log.e("In parser: ", "OB list size: " + objectArrayList.size() + ", siteIDList size: " + siteIDList.size());
         int index = 0;
         for (JSONObject object : objectArrayList) {
 

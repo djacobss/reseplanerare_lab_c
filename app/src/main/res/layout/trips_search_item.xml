@@ -6,7 +6,9 @@
     android:layout_height="wrap_content"
     android:background="#FFFFFF"
     android:elevation="5dp"
-    app:cardCornerRadius="4dp">
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp"
+    app:contentPadding="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -51,6 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginHorizontal="10dp"
             app:layout_constraintBottom_toTopOf="@id/tripsSearchArrowLL"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -79,6 +82,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/expandableTripsItemLayout"
+            android:background="@drawable/trip_subitem_border"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="visible"

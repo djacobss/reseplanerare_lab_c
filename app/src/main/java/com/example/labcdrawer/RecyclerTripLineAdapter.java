@@ -20,12 +20,13 @@ public class RecyclerTripLineAdapter extends RecyclerView.Adapter<RecyclerTripLi
     public static class RecyclerTripLineViewHolder extends RecyclerView.ViewHolder {
 
         private TextView lineText;
-        private ImageView connectImage;
+        private ImageView connectImage, travelModeImage;
 
         public RecyclerTripLineViewHolder(@NonNull View itemView) {
             super(itemView);
             lineText = itemView.findViewById(R.id.tripsSearchItemLineSubItem);
             connectImage = itemView.findViewById(R.id.tripsSearchItemImageSubItem);
+            travelModeImage = itemView.findViewById(R.id.tripsLineItemImage);
         }
 
         public TextView getLineText() {
@@ -34,6 +35,10 @@ public class RecyclerTripLineAdapter extends RecyclerView.Adapter<RecyclerTripLi
 
         public ImageView getConnectImage() {
             return connectImage;
+        }
+
+        public ImageView getTravelModeImage() {
+            return travelModeImage;
         }
     }
 
@@ -54,7 +59,7 @@ public class RecyclerTripLineAdapter extends RecyclerView.Adapter<RecyclerTripLi
     public void onBindViewHolder(@NonNull RecyclerTripLineAdapter.RecyclerTripLineViewHolder holder, int position) {
         TripLineItem currentItem = itemArrayList.get(position);
         holder.getLineText().setText(currentItem.getLine());
-        holder.getLineText().setCompoundDrawables(context.getResources().getDrawable(getDrawableFromMode(currentItem.getTransportMode())), null, null, null);
+        holder.getTravelModeImage().setImageResource(getDrawableFromMode(currentItem.getTransportMode()));
         if(position == itemArrayList.size()-1){
             holder.getConnectImage().setVisibility(View.GONE);
         }

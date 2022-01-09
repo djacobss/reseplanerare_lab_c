@@ -165,6 +165,7 @@ public class TripItem implements Serializable {
     }
 
     public void setupTripLineItems() {
+        tripLineItems = new ArrayList<>();
         for (int i = 0; i < lineList.size(); i++) {
             TripLineItem tripLineItem = new TripLineItem(
                     lineList.get(i),
@@ -192,6 +193,7 @@ public class TripItem implements Serializable {
     }
 
     public void setUpSubItems(){
+        tripSubItems = new ArrayList<>();
         for (int i = 0; i < lineList.size(); i++) {
             TripSubItem tripSubItem = new TripSubItem(startLocations.get(i),
                     endLocations.get(i), startTimes.get(i), endTimes.get(i),

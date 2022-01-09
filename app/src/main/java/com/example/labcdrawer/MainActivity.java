@@ -137,6 +137,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_trips_Favourites:
                 TripsFavouriteFragment tripsFavouriteFragment = TripsFavouriteFragment.newInstance();
+                tripsFavouriteFragment.setModel(model);
                 FragmentManager fragmentManagerFavT = getSupportFragmentManager();
                 FragmentTransaction transactionFavT = fragmentManagerFavT.beginTransaction();
                 transactionFavT.replace(R.id.fragment_container, tripsFavouriteFragment, "TRIPS_FAVOURITE_FRAGMENT").commit();

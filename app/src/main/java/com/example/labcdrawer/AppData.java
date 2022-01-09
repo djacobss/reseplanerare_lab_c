@@ -25,7 +25,7 @@ public class AppData implements Serializable {
         this.favouriteStations = favouriteStations;
     }
 
-    public List<TripItem> getFavouriteTrips() {
+    public ArrayList<TripItem> getFavouriteTrips() {
         return favouriteTripItems;
     }
 

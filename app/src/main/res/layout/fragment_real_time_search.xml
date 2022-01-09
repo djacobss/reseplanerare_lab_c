@@ -28,6 +28,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.8"
             android:background="@android:color/white"
+            android:inputType="text"
             android:hint="Ange Hållplats"
             android:paddingLeft="10dp" />
 

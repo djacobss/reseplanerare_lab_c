@@ -176,8 +176,16 @@ public class TripsSearchFragment extends Fragment {
                                 model.setCurrentStartLocID(firstLocation.getSiteIDString());
                                 model.setCurrentEndLocID(endLocation.getSiteIDString());
                                 tempTripItem.setFavourite(true);
-                                if(!model.getAppData().getFavouriteTrips().contains(tempTripItem)) {
+                                boolean favouriteExists = false;
+                                for (TripItem item : model.getAppData().getFavouriteTrips()) {
+                                    if(item.getStartLocationName().equals(tempTripItem.getStartLocationName()) && item.getEndLocationName().equals(tempTripItem.getEndLocationName())){
+                                        favouriteExists = true;
+                                    }
+                                }
+                                if(!favouriteExists) {
                                     model.getAppData().getFavouriteTrips().add(tempTripItem);
+                                } else {
+                                    Toast.makeText(getView().getContext(),"Favorit finns redan", Toast.LENGTH_LONG).show();
                                 }
                             }
                         });

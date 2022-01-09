@@ -166,9 +166,6 @@ public class Model {
     public void waitForResponses(JSONObject object, int size, int siteID) {
         billboardObjectContainer.add(object);
         billboardSiteIDContainer.add(siteID);
-        for (Integer i : billboardSiteIDContainer) {
-            Log.e("Test in Model 1: ", "OB container: " + billboardObjectContainer.size() + "SiteID Container: " + billboardSiteIDContainer.size());
-        }
         if (billboardObjectContainer.size() == size) {
             billboardDataReceived(billboardObjectContainer, billboardSiteIDContainer);
         }
@@ -176,6 +173,31 @@ public class Model {
 
     public void timeOutErrorMsg() {
         mainActivity.showTimeoutToast();
+    }
+
+    public void saveFromStationActivity(){
+        try {
+            FileOutputStream fos = stationRealTimeActivity.openFileOutput(FILE_NAME, stationRealTimeActivity.MODE_PRIVATE);
+            ObjectOutputStream os = new ObjectOutputStream(fos);
+            os.writeObject(appData);
+            os.close();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean loadFromStationActivity(){
+        try {
+            FileInputStream fis = stationRealTimeActivity.openFileInput(FILE_NAME);
+            ObjectInputStream is = new ObjectInputStream(fis);
+            appData = (AppData) is.readObject();
+            is.close();
+            fis.close();
+            return true;
+        } catch (IOException | ClassNotFoundException e) {
+            return false;
+        }
     }
 
     public void save() {

@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#FFFFFF"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingVertical="5dp"
+    android:gravity="center_vertical">
 
     <TextView
         android:id="@+id/tripsSubItemFirstLoc"
@@ -14,13 +16,14 @@
         android:paddingTop="5dp"
         android:text="Fenixvägen"
         android:textColor="@android:color/black"
-        android:textSize="13sp"
+        android:textSize="14sp"
         android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="65dp"
-        android:orientation="horizontal">
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <ImageView
             android:layout_width="40dp"
@@ -32,7 +35,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center">
 
 
             <LinearLayout
@@ -44,9 +48,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="14:00"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
 
             </LinearLayout>
@@ -59,27 +63,40 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tripsSubItemLineBetween"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="3dp"
                     android:background="@drawable/real_time_item_border"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold"
-                    android:drawableLeft="@drawable/ic_bustravel"
-                    android:text="611"
-                    android:textSize="15sp"
-                    android:padding="3dp"/>
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/tripsImageS2SLine"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_bustravel"/>
+
+                    <TextView
+                        android:id="@+id/tripsSubItemLineBetween"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="611"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/tripsSibItemLineNameBetween"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
+                    android:paddingHorizontal="3dp"
+                    android:text="Täby Kyrkby"
                     android:textColor="@android:color/black"
                     android:textSize="15sp"
-                    android:text="Täby Kyrkby"
-                    android:paddingHorizontal="3dp"/>
+                    android:textStyle="bold" />
 
 
             </LinearLayout>
@@ -92,10 +109,10 @@
                     android:id="@+id/tripsSubItemSecondTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
                     android:text="15:00"
-                    android:textSize="10sp"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -114,7 +131,7 @@
         android:paddingBottom="5dp"
         android:text="Flemmingsberg Station"
         android:textColor="@android:color/black"
-        android:textSize="13sp"
+        android:textSize="14sp"
         android:textStyle="bold" />
 
 </LinearLayout>

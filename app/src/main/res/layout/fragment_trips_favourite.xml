@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TripsFavouriteFragment">
+    tools:context=".TripsFavouriteFragment"
+    android:background="#071F4B">
 
-    <TextView
-        android:id="@+id/textViewFavT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="T Favourites"
-        android:textColor="@android:color/black"
-        android:textSize="25sp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tripsFavouriteRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

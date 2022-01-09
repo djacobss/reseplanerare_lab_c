@@ -37,12 +37,17 @@ public class StationRealTimeActivity extends AppCompatActivity {
 
 
         model = new Model();
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null && (LocationItem) getIntent().getSerializableExtra("Item") != null) {
             currentItem = (LocationItem) getIntent().getSerializableExtra("Item");
             appData = (AppData) getIntent().getSerializableExtra("AppData");
             returnToFragment = (ReturnToFragment) getIntent().getSerializableExtra("Fragment");
             model.setAppData(appData);
             model.setStationRealTimeActivity(this);
+        } else {
+            if(!model.loadFromStationActivity()) {
+                model.setAppData(new AppData());
+            }
+            returnToFragment = ReturnToFragment.REALTIME_SEARCH;
         }
         lastUpdated = findViewById(R.id.realTimeStationLastUpdatedText);
 
@@ -120,7 +125,7 @@ public class StationRealTimeActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        model.save();
+        model.saveFromStationActivity();
         super.onPause();
     }
 }
