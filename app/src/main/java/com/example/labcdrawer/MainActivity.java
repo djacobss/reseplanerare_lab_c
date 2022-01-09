@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_trips_showFavs:
                 TripsHomeFragment tripsHomeFragment = TripsHomeFragment.newInstance();
+                tripsHomeFragment.setModel(model);
                 FragmentManager fragmentManagerHomeT = getSupportFragmentManager();
                 FragmentTransaction transactionHomeT = fragmentManagerHomeT.beginTransaction();
                 transactionHomeT.replace(R.id.fragment_container, tripsHomeFragment, "TRIPS_HOME_FRAGMENT").commit();
@@ -203,6 +204,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case TRIPS_HOME:
                 TripsHomeFragment tripsHomeFragment = TripsHomeFragment.newInstance();
+                tripsHomeFragment.setModel(model);
                 FragmentManager fragmentManagerHomeT = getSupportFragmentManager();
                 FragmentTransaction transactionHomeT = fragmentManagerHomeT.beginTransaction();
                 transactionHomeT.replace(R.id.fragment_container, tripsHomeFragment, "TRIPS_HOME_FRAGMENT").commit();

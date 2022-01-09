@@ -30,4 +30,21 @@ public class TripDataFetcher {
         Volley.newRequestQueue(context).add(jsonObjectRequest);
     }
 
+
+    public static void getJSONHomeTripData(String startStationID, String endStationID, Context context, Model model) {
+
+
+        String url = "https://api.sl.se/api2/TravelplannerV3_1/trip.json?key=763571fb51e54878ab1d9c937571d9a6&originextid=" + startStationID + "&destextid=" + endStationID + "&lang=se";
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                response -> model.tripsDataReceived(response),
+                error -> {
+                    //TODO ERROR
+                    error.printStackTrace();
+                });
+        jsonObjectRequest.setShouldCache(false);
+        Volley.newRequestQueue(context).add(jsonObjectRequest);
+    }
+
 }

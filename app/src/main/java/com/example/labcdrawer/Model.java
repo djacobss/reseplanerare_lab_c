@@ -25,6 +25,9 @@ public class Model {
     public static final String FILE_NAME = "travelApp.dat";
     private TripsTimeChoice timeChoice;
     private String currentStartLocID, currentEndLocID;
+    private ReturnToFragment currentFragment;
+    private TripsHomeFragment tripsHomeFragment;
+    private ArrayList<TripItem> tripHomeItemResults;
 
     public Model() {
         appData = new AppData();
@@ -175,7 +178,7 @@ public class Model {
         mainActivity.showTimeoutToast();
     }
 
-    public void saveFromStationActivity(){
+    public void saveFromStationActivity() {
         try {
             FileOutputStream fos = stationRealTimeActivity.openFileOutput(FILE_NAME, stationRealTimeActivity.MODE_PRIVATE);
             ObjectOutputStream os = new ObjectOutputStream(fos);
@@ -187,7 +190,7 @@ public class Model {
         }
     }
 
-    public boolean loadFromStationActivity(){
+    public boolean loadFromStationActivity() {
         try {
             FileInputStream fis = stationRealTimeActivity.openFileInput(FILE_NAME);
             ObjectInputStream is = new ObjectInputStream(fis);
@@ -263,8 +266,19 @@ public class Model {
     }
 
     public void tripsDataReceived(JSONObject response) {
-        ArrayList<TripItem> tripItems = TripsJSONParser.parseTripsJSON(response, this);
-        tripsSearchFragment.showTripsResults(tripItems);
+        if (currentFragment == ReturnToFragment.TRIPS_SEARCH) {
+            ArrayList<TripItem> tripItems = TripsJSONParser.parseTripsJSON(response, this);
+            tripsSearchFragment.showTripsResults(tripItems);
+        } else if (currentFragment == ReturnToFragment.TRIPS_HOME) {
+            tripHomeItemResults.add(TripsJSONParser.parseTripsJSON(response, this).get(0));
+            if (tripHomeItemResults.size() < appData.getFavouriteTrips().size()) {
+                TripDataFetcher.getJSONHomeTripData(
+                        appData.getFavouriteTrips().get(tripHomeItemResults.size()).getStartLocationID(),
+                        appData.getFavouriteTrips().get(tripHomeItemResults.size()).getEndLocationID(),tripsHomeFragment.getViewContext(),this);
+            } else if (tripHomeItemResults.size() >= appData.getFavouriteTrips().size()) {
+                tripsHomeFragment.showResults(tripHomeItemResults);
+            }
+        }
     }
 
     public String getCurrentStartLocID() {
@@ -281,5 +295,29 @@ public class Model {
 
     public void setCurrentEndLocID(String currentEndLocID) {
         this.currentEndLocID = currentEndLocID;
+    }
+
+    public ReturnToFragment getCurrentFragment() {
+        return currentFragment;
+    }
+
+    public void setCurrentFragment(ReturnToFragment currentFragment) {
+        this.currentFragment = currentFragment;
+    }
+
+    public TripsHomeFragment getTripsHomeFragment() {
+        return tripsHomeFragment;
+    }
+
+    public void setTripsHomeFragment(TripsHomeFragment tripsHomeFragment) {
+        this.tripsHomeFragment = tripsHomeFragment;
+    }
+
+    public ArrayList<TripItem> getTripHomeItemResults() {
+        return tripHomeItemResults;
+    }
+
+    public void setTripHomeItemResults(ArrayList<TripItem> tripHomeItemResults) {
+        this.tripHomeItemResults = tripHomeItemResults;
     }
 }

@@ -85,6 +85,7 @@ public class TripsSearchFragment extends Fragment {
         model.setTripsSearchFragment(this);
         datePickEditText.setInputType(InputType.TYPE_NULL);
         datePickEditText.setEnabled(false);
+        model.setCurrentFragment(ReturnToFragment.TRIPS_SEARCH);
         expandableLayout.setVisibility(View.GONE);
         radioGroup.check(R.id.tripsSearchRadio1);
         datePicked = null;
@@ -173,6 +174,7 @@ public class TripsSearchFragment extends Fragment {
                                 tempTripItem.setStartLocationID(firstLocation.getSiteIDString());
                                 tempTripItem.setEndLocationName(endLocation.getPlaceName());
                                 tempTripItem.setEndLocationID(endLocation.getSiteIDString());
+
                                 model.setCurrentStartLocID(firstLocation.getSiteIDString());
                                 model.setCurrentEndLocID(endLocation.getSiteIDString());
                                 tempTripItem.setFavourite(true);

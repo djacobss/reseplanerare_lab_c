@@ -56,9 +56,6 @@ public class TripsJSONParser {
             //TODO ERROR MSG
             e.printStackTrace();
         }
-        TripItem testItem = tripItems.get(0);
-        Log.e("Test: ", testItem.getStartLocationName() + ", " + testItem.getEndLocationName() + ", " + testItem.getStartLocations() + ", " + testItem.getEndLocations() + ", "
-         + testItem.getLineList() + ", " + testItem.getStartTimes() + ", " + testItem.getEndTimes() + ", " + testItem.getLineDirections());
         return tripItems;
     }
 
