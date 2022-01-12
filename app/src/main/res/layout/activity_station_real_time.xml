@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="#071F4B"
     tools:context=".StationRealTimeActivity">
 
@@ -16,24 +16,24 @@
 
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/realTimeStationLastUpdatedText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/realTimeStationLastUpdatedText"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <TextView
         android:id="@+id/realTimeStationLastUpdatedText"
-        android:background="#071F4B"
         android:layout_width="match_parent"
         android:layout_height="20dp"
+        android:background="#071F4B"
         android:gravity="center"
         android:text="Last Updated:"
         android:textColor="@android:color/white"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/realTimeRecyclerViewStation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbarStationRealTime"
-        app:layout_constraintBottom_toTopOf="@id/realTimeRecyclerViewStation"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarStationRealTime" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/realTimeRecyclerViewStation"
@@ -41,10 +41,10 @@
         android:layout_height="0dp"
         android:scrollbars="vertical"
         android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@id/realTimeStationLastUpdatedText"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/realTimeStationLastUpdatedText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

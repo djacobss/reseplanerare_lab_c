@@ -22,7 +22,7 @@ public class RecyclerTripsAdapter extends RecyclerView.Adapter<RecyclerTripsAdap
     private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
 
 
-    public static class RecyclerTripsViewHolder extends RecyclerView.ViewHolder{
+    public static class RecyclerTripsViewHolder extends RecyclerView.ViewHolder {
 
         private CardView mainCard;
         private TextView startTimeText, endTimeText, startStationText, endStationText;
@@ -80,7 +80,7 @@ public class RecyclerTripsAdapter extends RecyclerView.Adapter<RecyclerTripsAdap
         }
     }
 
-    public RecyclerTripsAdapter(ArrayList<TripItem> itemArrayList, Context context){
+    public RecyclerTripsAdapter(ArrayList<TripItem> itemArrayList, Context context) {
         this.itemArrayList = itemArrayList;
         this.context = context;
     }
@@ -112,7 +112,7 @@ public class RecyclerTripsAdapter extends RecyclerView.Adapter<RecyclerTripsAdap
                 LinearLayoutManager.HORIZONTAL, false);
         layoutManagerLines.setInitialPrefetchItemCount(currentItem.getLineList().size());
 
-        RecyclerTripLineAdapter lineAdapter = new RecyclerTripLineAdapter(currentItem.getTripLineItems(),context);
+        RecyclerTripLineAdapter lineAdapter = new RecyclerTripLineAdapter(currentItem.getTripLineItems(), context);
 
         holder.getLineRecyclerView().setLayoutManager(layoutManagerLines);
         holder.getLineRecyclerView().setAdapter(lineAdapter);
@@ -123,7 +123,7 @@ public class RecyclerTripsAdapter extends RecyclerView.Adapter<RecyclerTripsAdap
         );
         layoutManagerSub.setInitialPrefetchItemCount(currentItem.getLineList().size());
 
-        RecyclerTripSubAdapter subAdapter = new RecyclerTripSubAdapter(currentItem.getTripSubItems(),context);
+        RecyclerTripSubAdapter subAdapter = new RecyclerTripSubAdapter(currentItem.getTripSubItems(), context);
 
         holder.getExpandableRecyclerView().setLayoutManager(layoutManagerSub);
         holder.getExpandableRecyclerView().setAdapter(subAdapter);

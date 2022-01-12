@@ -42,7 +42,7 @@ public class RecyclerTripLineAdapter extends RecyclerView.Adapter<RecyclerTripLi
         }
     }
 
-    public RecyclerTripLineAdapter(ArrayList<TripLineItem> itemArrayList, Context context){
+    public RecyclerTripLineAdapter(ArrayList<TripLineItem> itemArrayList, Context context) {
         this.itemArrayList = itemArrayList;
         this.context = context;
     }
@@ -60,7 +60,7 @@ public class RecyclerTripLineAdapter extends RecyclerView.Adapter<RecyclerTripLi
         TripLineItem currentItem = itemArrayList.get(position);
         holder.getLineText().setText(currentItem.getLine());
         holder.getTravelModeImage().setImageResource(getDrawableFromMode(currentItem.getTransportMode()));
-        if(position == itemArrayList.size()-1){
+        if (position == itemArrayList.size() - 1) {
             holder.getConnectImage().setVisibility(View.GONE);
         }
     }
@@ -75,8 +75,8 @@ public class RecyclerTripLineAdapter extends RecyclerView.Adapter<RecyclerTripLi
         return R.layout.line_list_trips_search_item;
     }
 
-    private int getDrawableFromMode(TransportMode transportMode){
-        switch (transportMode){
+    private int getDrawableFromMode(TransportMode transportMode) {
+        switch (transportMode) {
             case BUS:
                 return R.drawable.ic_bustravel;
             case TRAIN:

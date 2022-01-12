@@ -34,7 +34,7 @@ public class LocationItem implements Serializable {
         return siteID;
     }
 
-    public String getSiteIDString(){
+    public String getSiteIDString() {
         return Integer.toString(siteID);
     }
 

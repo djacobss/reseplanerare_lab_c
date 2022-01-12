@@ -12,20 +12,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@id/tripsAddFavouriteTripExpandable"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tripsAddFavouriteTripExpandable">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/tripsSearchTopConstraint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#93A2C8"
+            app:layout_constraintBottom_toTopOf="@id/tripsSearchBottomLinearLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tripsSearchBottomLinearLayout">
+            app:layout_constraintTop_toTopOf="parent">
 
 
             <LinearLayout
@@ -282,9 +282,9 @@
             android:layout_height="35dp"
             android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tripsAddFavouriteButton"/>
+            app:layout_constraintStart_toEndOf="@id/tripsAddFavouriteButton"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

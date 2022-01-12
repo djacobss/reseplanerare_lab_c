@@ -170,8 +170,8 @@ public class Model {
     public void waitForResponses(JSONObject object, int siteID, Context context) {
         billboardObjectContainer.add(object);
         billboardSiteIDContainer.add(siteID);
-        if(billboardObjectContainer.size() < appData.getFavouriteStations().size()) {
-            BillboardDataFetcher.getBillboardJSONData(appData.getFavouriteStations().get(billboardObjectContainer.size()).getSiteIDString(),context,this);
+        if (billboardObjectContainer.size() < appData.getFavouriteStations().size()) {
+            BillboardDataFetcher.getBillboardJSONData(appData.getFavouriteStations().get(billboardObjectContainer.size()).getSiteIDString(), context, this);
         } else if (billboardObjectContainer.size() >= appData.getFavouriteStations().size()) {
             billboardDataReceived(billboardObjectContainer, billboardSiteIDContainer);
         }
@@ -181,7 +181,7 @@ public class Model {
         mainActivity.showTimeoutToast();
     }
 
-    public void timeOutInStationActivity(){
+    public void timeOutInStationActivity() {
         stationRealTimeActivity.showTimeout();
     }
 
@@ -281,7 +281,7 @@ public class Model {
             if (tripHomeItemResults.size() < appData.getFavouriteTrips().size()) {
                 TripDataFetcher.getJSONHomeTripData(
                         appData.getFavouriteTrips().get(tripHomeItemResults.size()).getStartLocationID(),
-                        appData.getFavouriteTrips().get(tripHomeItemResults.size()).getEndLocationID(),tripsHomeFragment.getViewContext(),this);
+                        appData.getFavouriteTrips().get(tripHomeItemResults.size()).getEndLocationID(), tripsHomeFragment.getViewContext(), this);
             } else if (tripHomeItemResults.size() >= appData.getFavouriteTrips().size()) {
                 tripsHomeFragment.showResults(tripHomeItemResults);
             }

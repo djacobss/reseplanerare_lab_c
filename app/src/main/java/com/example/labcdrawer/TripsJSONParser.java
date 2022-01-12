@@ -34,7 +34,7 @@ public class TripsJSONParser {
                     listOfLegInfo.add(legArray.getJSONObject(j));
                 }
                 for (JSONObject legObject : listOfLegInfo) {
-                    if(!legObject.getString("type").equals("WALK")) {
+                    if (!legObject.getString("type").equals("WALK")) {
                         tripItem.getModeOfTravel().add(getTravelMode(legObject));
                         tripItem.getLineList().add(legObject.getJSONObject("Product").getString("line"));
                         tripItem.getLineDirections().add(legObject.getString("direction"));

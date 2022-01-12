@@ -15,7 +15,7 @@ public class RecyclerTripsFavouriteAdapter extends RecyclerView.Adapter<Recycler
 
     private ArrayList<TripItem> itemArrayList;
 
-    public static class RecyclerTripsFavouriteVH extends RecyclerView.ViewHolder{
+    public static class RecyclerTripsFavouriteVH extends RecyclerView.ViewHolder {
 
         private ImageView removeImage;
         private TextView startLocation, endLocation;
@@ -40,7 +40,7 @@ public class RecyclerTripsFavouriteAdapter extends RecyclerView.Adapter<Recycler
         }
     }
 
-    public RecyclerTripsFavouriteAdapter(ArrayList<TripItem> itemArrayList){
+    public RecyclerTripsFavouriteAdapter(ArrayList<TripItem> itemArrayList) {
         this.itemArrayList = itemArrayList;
     }
 

@@ -39,14 +39,14 @@ public class RecyclerBillboardSubAdapter extends RecyclerView.Adapter<RecyclerBi
         }
     }
 
-    public RecyclerBillboardSubAdapter(ArrayList<BillboardSubItem> itemArrayList){
+    public RecyclerBillboardSubAdapter(ArrayList<BillboardSubItem> itemArrayList) {
         this.itemArrayList = itemArrayList;
     }
 
     @NonNull
     @Override
     public RecyclerBillboardSubViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(viewType,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
         RecyclerBillboardSubViewHolder recyclerBillboardSubViewHolder = new RecyclerBillboardSubViewHolder(view);
         return recyclerBillboardSubViewHolder;
     }

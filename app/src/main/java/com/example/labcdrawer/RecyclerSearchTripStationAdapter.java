@@ -36,7 +36,7 @@ public class RecyclerSearchTripStationAdapter extends RecyclerView.Adapter<Recyc
         }
     }
 
-    public RecyclerSearchTripStationAdapter(ArrayList<LocationItem> itemArrayList, OnStationTripClickListener clickListener){
+    public RecyclerSearchTripStationAdapter(ArrayList<LocationItem> itemArrayList, OnStationTripClickListener clickListener) {
         this.itemArrayList = itemArrayList;
         this.clickListener = clickListener;
     }
@@ -71,7 +71,7 @@ public class RecyclerSearchTripStationAdapter extends RecyclerView.Adapter<Recyc
         return R.layout.trips_search_location_item;
     }
 
-    public interface OnStationTripClickListener{
+    public interface OnStationTripClickListener {
         void onStationTripClick(LocationItem locationItem);
     }
 }

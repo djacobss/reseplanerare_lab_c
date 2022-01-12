@@ -5,22 +5,34 @@
     android:background="#020D21"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:paddingVertical="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="15dp"
         android:src="@drawable/busicon" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:text="Reseplanerare"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="4dp"
+        android:text="Förenklad Reseplanerare"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#fff"
+        android:textSize="16dp"
         android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:text="för Stockholms Länstrafik"
+        android:textColor="#ffffff"
+        android:textSize="13dp" />
 
 
 </LinearLayout>

@@ -19,12 +19,12 @@ public class BillboardParser {
                 BillboardItem billboardItem = new BillboardItem();
                 JSONObject responseData = object.getJSONObject("ResponseData");
                 RealTimeParser realTimeParser = new RealTimeParser();
-                JSONArray jsonArray = realTimeParser.setJSONArrayFromTransportMode(responseData,model);
+                JSONArray jsonArray = realTimeParser.setJSONArrayFromTransportMode(responseData, model);
                 if (jsonArray.length() > 0) {
                     ArrayList<BillboardSubItem> billboardSubItems = new ArrayList<>();
 
                     for (LocationItem item : model.getAppData().getFavouriteStations()) {
-                        if(item.getSiteID() == siteIDList.get(index)){
+                        if (item.getSiteID() == siteIDList.get(index)) {
                             billboardItem.setStationName(item.getPlaceName());
                         }
                     }
@@ -44,7 +44,7 @@ public class BillboardParser {
                     ArrayList<BillboardSubItem> billboardSubItems = new ArrayList<>();
 
                     for (LocationItem item : model.getAppData().getFavouriteStations()) {
-                        if(item.getSiteID() == siteIDList.get(index)){
+                        if (item.getSiteID() == siteIDList.get(index)) {
                             billboardItem.setStationName(item.getPlaceName());
                         }
                     }

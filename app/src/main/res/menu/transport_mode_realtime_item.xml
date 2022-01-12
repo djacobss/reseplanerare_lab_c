@@ -4,31 +4,31 @@
 
     <item
         android:id="@+id/realTimeUpdateItem"
-        android:title="Uppdatera"
         android:icon="@drawable/ic_baseline_refresh_24"
-        app:showAsAction="always"/>
+        android:title="Uppdatera"
+        app:showAsAction="always" />
     <item
         android:id="@+id/transportModeItem"
-        android:title="Färdsätt"
         android:icon="@drawable/ic_transportmode"
+        android:title="Färdsätt"
         app:showAsAction="always">
         <menu>
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/transportModeBusItem"
-                    android:title="Buss"/>
+                    android:title="Buss" />
                 <item
                     android:id="@+id/transportModeMetroItem"
-                    android:title="Tunnelbana"/>
+                    android:title="Tunnelbana" />
                 <item
                     android:id="@+id/transportModeTrainItem"
-                    android:title="Tåg"/>
+                    android:title="Tåg" />
                 <item
                     android:id="@+id/transportModeTramItem"
-                    android:title="Spårvagn"/>
+                    android:title="Spårvagn" />
                 <item
                     android:id="@+id/transportModeShipItem"
-                    android:title="Färja"/>
+                    android:title="Färja" />
             </group>
 
         </menu>

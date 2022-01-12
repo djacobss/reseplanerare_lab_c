@@ -54,7 +54,7 @@ public class TripsHomeFragment extends Fragment {
         model.setTripHomeItemResults(new ArrayList<>());
         model.setCurrentFragment(ReturnToFragment.TRIPS_HOME);
 
-        if(!model.getAppData().getFavouriteTrips().isEmpty()) {
+        if (!model.getAppData().getFavouriteTrips().isEmpty()) {
             TripDataFetcher.getJSONHomeTripData(model.getAppData().getFavouriteTrips().get(0).getStartLocationID(), model.getAppData().getFavouriteTrips().get(0).getEndLocationID(), view.getContext(), model);
         }
 
@@ -84,14 +84,14 @@ public class TripsHomeFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.billboardOptionsItemRefresh) {
             model.setTripHomeItemResults(new ArrayList<>());
-            if(!model.getAppData().getFavouriteTrips().isEmpty()) {
+            if (!model.getAppData().getFavouriteTrips().isEmpty()) {
                 TripDataFetcher.getJSONHomeTripData(model.getAppData().getFavouriteTrips().get(0).getStartLocationID(), model.getAppData().getFavouriteTrips().get(0).getEndLocationID(), getView().getContext(), model);
             }
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public Context getViewContext(){
+    public Context getViewContext() {
         return getView().getContext();
     }
 }

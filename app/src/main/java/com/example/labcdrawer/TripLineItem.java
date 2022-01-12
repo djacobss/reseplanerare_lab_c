@@ -7,11 +7,11 @@ public class TripLineItem implements Serializable {
     private String line;
     private TransportMode transportMode;
 
-    public TripLineItem(){
+    public TripLineItem() {
 
     }
 
-    public TripLineItem(String line, TransportMode transportMode){
+    public TripLineItem(String line, TransportMode transportMode) {
         this.line = line;
         this.transportMode = transportMode;
     }

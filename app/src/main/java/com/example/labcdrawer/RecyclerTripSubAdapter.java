@@ -17,7 +17,7 @@ public class RecyclerTripSubAdapter extends RecyclerView.Adapter<RecyclerTripSub
     private ArrayList<TripSubItem> itemArrayList;
     private Context context;
 
-    public static class RecyclerTripSubViewHolder extends RecyclerView.ViewHolder{
+    public static class RecyclerTripSubViewHolder extends RecyclerView.ViewHolder {
 
         private TextView startStation, endStation, startTime, endTime, direction, lineText;
         private ImageView travelModeImage;
@@ -62,7 +62,7 @@ public class RecyclerTripSubAdapter extends RecyclerView.Adapter<RecyclerTripSub
         }
     }
 
-    public RecyclerTripSubAdapter(ArrayList<TripSubItem> itemArrayList, Context context){
+    public RecyclerTripSubAdapter(ArrayList<TripSubItem> itemArrayList, Context context) {
         this.itemArrayList = itemArrayList;
         this.context = context;
     }
@@ -97,8 +97,8 @@ public class RecyclerTripSubAdapter extends RecyclerView.Adapter<RecyclerTripSub
         return R.layout.station_to_station_item;
     }
 
-    private int getImageIDFromItem(TripSubItem tripSubItem){
-        switch (tripSubItem.getTransportMode()){
+    private int getImageIDFromItem(TripSubItem tripSubItem) {
+        switch (tripSubItem.getTransportMode()) {
             case BUS:
                 return R.drawable.ic_bustravel;
             case TRAIN:

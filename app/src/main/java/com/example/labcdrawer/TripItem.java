@@ -192,7 +192,7 @@ public class TripItem implements Serializable {
         this.tripSubItems = tripSubItems;
     }
 
-    public void setUpSubItems(){
+    public void setUpSubItems() {
         tripSubItems = new ArrayList<>();
         for (int i = 0; i < lineList.size(); i++) {
             TripSubItem tripSubItem = new TripSubItem(startLocations.get(i),

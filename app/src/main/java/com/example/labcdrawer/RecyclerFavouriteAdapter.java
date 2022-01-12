@@ -40,7 +40,7 @@ public class RecyclerFavouriteAdapter extends RecyclerView.Adapter<RecyclerFavou
     }
 
 
-    public RecyclerFavouriteAdapter(ArrayList<LocationItem> itemArrayList, Context context, FavItemClickListener favItemClickListener){
+    public RecyclerFavouriteAdapter(ArrayList<LocationItem> itemArrayList, Context context, FavItemClickListener favItemClickListener) {
         this.itemArrayList = itemArrayList;
         this.context = context;
         this.favItemClickListener = favItemClickListener;
@@ -63,7 +63,7 @@ public class RecyclerFavouriteAdapter extends RecyclerView.Adapter<RecyclerFavou
         holder.getFavouriteImageView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(itemArrayList.contains(currentItem)) {
+                if (itemArrayList.contains(currentItem)) {
                     itemArrayList.remove(currentItem);
                     notifyItemRemoved(holder.getBindingAdapterPosition());
 
@@ -82,7 +82,7 @@ public class RecyclerFavouriteAdapter extends RecyclerView.Adapter<RecyclerFavou
         return R.layout.example_item;
     }
 
-    public interface FavItemClickListener{
+    public interface FavItemClickListener {
         void onFavItemClicked(LocationItem locationItem);
     }
 }

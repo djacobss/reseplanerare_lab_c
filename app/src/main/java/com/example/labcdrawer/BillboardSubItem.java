@@ -6,11 +6,11 @@ public class BillboardSubItem implements Serializable {
 
     private String line, destination, displayTime;
 
-    public BillboardSubItem(){
+    public BillboardSubItem() {
 
     }
 
-    public BillboardSubItem(String line, String destination, String displayTime){
+    public BillboardSubItem(String line, String destination, String displayTime) {
         this.line = line;
         this.destination = destination;
         this.displayTime = displayTime;

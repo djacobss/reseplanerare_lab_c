@@ -4,9 +4,9 @@
     android:id="@+id/tripsSearchCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="10dp"
     android:background="#FFFFFF"
     android:elevation="5dp"
-    android:layout_margin="10dp"
     app:cardCornerRadius="10dp"
     app:contentPadding="10dp">
 
@@ -47,13 +47,12 @@
         </LinearLayout>
 
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tripsSearchItemTopRecycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginHorizontal="10dp"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@id/tripsSearchArrowLL"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,25 +81,25 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/expandableTripsItemLayout"
-            android:background="@drawable/trip_subitem_border"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/trip_subitem_border"
             android:visibility="visible"
-            app:layout_constraintTop_toBottomOf="@id/tripsSearchArrowLL"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tripsSearchItemBottomLL"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tripsSearchItemBottomLL">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tripsSearchArrowLL">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/expandableRecyclerViewTrips"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginVertical="5dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

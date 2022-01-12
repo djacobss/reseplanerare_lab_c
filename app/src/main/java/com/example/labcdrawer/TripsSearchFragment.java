@@ -263,7 +263,7 @@ public class TripsSearchFragment extends Fragment {
         searchTripsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getView().getContext(), "Ange hållplatser innan sökning", Toast.LENGTH_LONG);
+                Toast.makeText(getView().getContext(), "Ange hållplatser innan sökning", Toast.LENGTH_LONG).show();
             }
         });
     }

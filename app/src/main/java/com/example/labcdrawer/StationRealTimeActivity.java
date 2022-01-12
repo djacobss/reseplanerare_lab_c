@@ -129,6 +129,6 @@ public class StationRealTimeActivity extends AppCompatActivity {
     }
 
     public void showTimeout() {
-        Toast.makeText(this,"Timeout Error", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Timeout Error", Toast.LENGTH_LONG).show();
     }
 }
