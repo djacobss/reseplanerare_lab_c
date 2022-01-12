@@ -3,6 +3,10 @@ package com.example.labcdrawer;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Class that holds members with data for the Billboard item.
+ */
+
 public class BillboardItem implements Serializable {
 
     private String stationName, nextLineNumber, nextDisplayTime;

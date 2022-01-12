@@ -7,6 +7,9 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+/**
+ * Fetches real time data from the SL api.
+ */
 public class RealTimeDataFetcher {
 
     public static void getJSONRealTimeData(String siteID, Context context, Model model) {

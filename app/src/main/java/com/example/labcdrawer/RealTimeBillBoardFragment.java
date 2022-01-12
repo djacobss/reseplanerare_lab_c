@@ -19,6 +19,9 @@ import android.view.animation.AnimationUtils;
 
 import java.util.ArrayList;
 
+/**
+ * Fragment for the Billboard instance.
+ */
 public class RealTimeBillBoardFragment extends Fragment {
 
 

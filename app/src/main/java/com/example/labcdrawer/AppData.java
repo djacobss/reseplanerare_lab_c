@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that holds the current data of favourites.
+ */
+
 public class AppData implements Serializable {
 
     private ArrayList<LocationItem> favouriteStations;

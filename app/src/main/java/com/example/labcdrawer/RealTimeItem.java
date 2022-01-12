@@ -1,5 +1,8 @@
 package com.example.labcdrawer;
 
+/**
+ * Class containing the required members for showing a real time item.
+ */
 public class RealTimeItem {
 
     private String busDestination, timeLeft, transportMode, lineNumber;

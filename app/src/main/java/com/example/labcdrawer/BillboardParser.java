@@ -8,8 +8,19 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * Class that has one method for parsing the Billboard JSON data.
+ */
+
 public class BillboardParser {
 
+    /**
+     * Parses the JSON data for the billboard.
+     * @param objectArrayList List of JSON objects from the billboard data fetcher.
+     * @param model
+     * @param siteIDList List of site IDs for the stations
+     * @return a list of billboard items with correctly assigned data.
+     */
     public static ArrayList<BillboardItem> parseBillboardJSON(ArrayList<JSONObject> objectArrayList, Model model, ArrayList<Integer> siteIDList) {
         ArrayList<BillboardItem> billboardItems = new ArrayList<>();
         int index = 0;
@@ -55,6 +66,7 @@ public class BillboardParser {
                     billboardItems.add(billboardItem);
                 }
             } catch (JSONException e) {
+                Log.e("Error: ", "JSON parsing error");
                 e.printStackTrace();
             }
             index++;

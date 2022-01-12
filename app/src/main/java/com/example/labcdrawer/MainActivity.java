@@ -150,6 +150,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    /**
+     * Assigns View members from the layout.
+     */
     private void assignViews() {
 
         toolbar = findViewById(R.id.toolbar);
@@ -169,6 +172,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    /**
+     * Colors menu items in the drawer.
+     */
     private void colorTopMenuItems() {
 
         navigationMenu = navigationView.getMenu();
@@ -183,6 +189,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    /**
+     * Returns to a specific fragment if returning from a different activity.
+     */
     private void returnToFragment() {
         switch ((ReturnToFragment) getIntent().getSerializableExtra("Fragment")) {
             case REALTIME_BILLBOARD:
@@ -236,6 +245,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         alertDialog.show();
     }
 
+    /**
+     * Checks if there is connection on the device.
+     * @return false if no connection was detected, true if connection exists.
+     */
     public boolean isConnected() {  //Checks for internet connection
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 

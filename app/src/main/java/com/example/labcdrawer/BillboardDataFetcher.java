@@ -11,6 +11,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * Class that has one method that fetches a JSON object for the billboard.
+ * Method sends the response to the model.
+ */
+
 public class BillboardDataFetcher {
 
     public static void getBillboardJSONData(String string, Context context, Model model) {

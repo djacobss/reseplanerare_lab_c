@@ -12,6 +12,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+/**
+ * Model class for handling current instance data and logic.
+ */
 public class Model {
 
     private AppData appData;
@@ -64,6 +67,11 @@ public class Model {
         return stringArrayList;
     }
 
+    /**
+     * Creates an ArrayList of LocationItems from the JSON parser for station searching and then notifies
+     * the fragment to show the results of the parsing.
+     * @param response JSON object collected in a data fetcher.
+     */
     public void stationSearchDataReceived(JSONObject response) {
         ArrayList<LocationItem> searchResultList = SearchStationParser.parseStationData(response);
         int index = 0;
@@ -95,6 +103,11 @@ public class Model {
         return searchFragment;
     }
 
+    /**
+     * Checks if a LocationItem exists in the favourite stations list in the AppData.
+     * @param item A LocationItem to be checked.
+     * @return true if item exists in the list, false if it doesn't.
+     */
     public boolean setSearchItemFavourite(LocationItem item) {
         if (!appData.getFavouriteStations().isEmpty()) {
             ArrayList<LocationItem> tempList = appData.getFavouriteStations();
@@ -117,6 +130,11 @@ public class Model {
         return appData.removeFavouriteStation(station);
     }
 
+    /**
+     * Creates an ArrayList of RealTimeItems collected from a data fetcher by calling a parser and then notifies
+     * the activity to show the results.
+     * @param response JSON object to be parsed.
+     */
     public void realTimeDataReceived(JSONObject response) {
         RealTimeParser realTimeParser = new RealTimeParser();
         ArrayList<RealTimeItem> tempList = realTimeParser.parseRealTimeData(response, this);
@@ -124,6 +142,10 @@ public class Model {
     }
 
 
+    /**
+     * Sets the last time the data was updated string from the string received in the parsing.
+     * @param latestUpdate A date string from parsing.
+     */
     public void setLastUpdatedRealTime(String latestUpdate) {
         latestUpdate = latestUpdate.substring(0, Math.min(latestUpdate.length(), 16));
         StringBuilder builder = new StringBuilder(latestUpdate);
@@ -152,6 +174,12 @@ public class Model {
         this.stationRealTimeActivity = stationRealTimeActivity;
     }
 
+    /**
+     * Creates an ArrayList of BillboardItems collected from a data fetcher by calling a parser and then notifies
+     * the activity to show the results.
+     * @param objects ArrayList of JSON objects collected in waitForResponse method.
+     * @param siteIDs ArrayList of Site IDs collected in waitForResponse method.
+     */
     public void billboardDataReceived(ArrayList<JSONObject> objects, ArrayList<Integer> siteIDs) {
         ArrayList<BillboardItem> billboardItems = BillboardParser.parseBillboardJSON(objects, this, siteIDs);
         billboardObjectContainer.clear();
@@ -167,6 +195,12 @@ public class Model {
         this.billBoardFragment = billBoardFragment;
     }
 
+    /**
+     * Gets called in the BillboardDataFetcher when a JSON object has been received and ads the object and Site ID to an ArrayList.
+     * @param object JSON object from data fetcher.
+     * @param siteID Site ID used to fetch the data.
+     * @param context
+     */
     public void waitForResponses(JSONObject object, int siteID, Context context) {
         billboardObjectContainer.add(object);
         billboardSiteIDContainer.add(siteID);
@@ -185,6 +219,9 @@ public class Model {
         stationRealTimeActivity.showTimeout();
     }
 
+    /**
+     * Saved Serialized AppData
+     */
     public void saveFromStationActivity() {
         try {
             FileOutputStream fos = stationRealTimeActivity.openFileOutput(FILE_NAME, stationRealTimeActivity.MODE_PRIVATE);
@@ -197,6 +234,9 @@ public class Model {
         }
     }
 
+    /**
+     * Loads Serialized AppData
+     */
     public boolean loadFromStationActivity() {
         try {
             FileInputStream fis = stationRealTimeActivity.openFileInput(FILE_NAME);
@@ -210,6 +250,9 @@ public class Model {
         }
     }
 
+    /**
+     * Saved Serialized AppData
+     */
     public void save() {
         try {
             FileOutputStream fos = mainActivity.openFileOutput(FILE_NAME, mainActivity.MODE_PRIVATE);
@@ -222,6 +265,9 @@ public class Model {
         }
     }
 
+    /**
+     * Loads Serialized AppData
+     */
     public boolean load() {
         try {
             FileInputStream fis = mainActivity.openFileInput(FILE_NAME);
@@ -243,6 +289,11 @@ public class Model {
         this.tripsSearchFragment = tripsSearchFragment;
     }
 
+    /**
+     * Gets called in the TripStationDataFetcher when an object has been fetched.
+     * Creates ArrayList of LocationItems and then notifies fragment to show the results.
+     * @param response JSON object fetched in data fetcher.
+     */
     public void stationTripSearchDataReceived(JSONObject response) {
         ArrayList<LocationItem> searchResultList = SearchStationParser.parseStationData(response);
         tripsSearchFragment.showStationResults(searchResultList);
@@ -272,6 +323,12 @@ public class Model {
         this.desiredDate = desiredDate;
     }
 
+    /**
+     * Gets called in the TripDataFetcher when an object has been fetched.
+     * Checks which fragment is open and then uses the appropriate parser to make a list of items.
+     * Notifies the fragment to show the results.
+     * @param response JSON object fetcher in data fetcher.
+     */
     public void tripsDataReceived(JSONObject response) {
         if (currentFragment == ReturnToFragment.TRIPS_SEARCH) {
             ArrayList<TripItem> tripItems = TripsJSONParser.parseTripsJSON(response, this);

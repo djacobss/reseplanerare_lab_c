@@ -2,6 +2,10 @@ package com.example.labcdrawer;
 
 import java.io.Serializable;
 
+/**
+ * Class that holds members with data for the items in the list inside the Billboard items.
+ */
+
 public class BillboardSubItem implements Serializable {
 
     private String line, destination, displayTime;

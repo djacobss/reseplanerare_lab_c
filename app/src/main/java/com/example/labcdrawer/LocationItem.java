@@ -2,6 +2,10 @@ package com.example.labcdrawer;
 
 import java.io.Serializable;
 
+/**
+ * Class that holds members with data for a specific station or site.
+ */
+
 public class LocationItem implements Serializable {
 
     private String placeName;

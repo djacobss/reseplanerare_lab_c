@@ -14,6 +14,12 @@ public class RealTimeParser {
 
     }
 
+    /**
+     *
+     * @param response
+     * @param model
+     * @return
+     */
     public ArrayList<RealTimeItem> parseRealTimeData(JSONObject response, Model model) {
         ArrayList<RealTimeItem> tempList = new ArrayList<>();
         try {
@@ -39,6 +45,12 @@ public class RealTimeParser {
         return tempList;
     }
 
+    /**
+     *
+     * @param responseData
+     * @param model
+     * @return
+     */
     public JSONArray setJSONArrayFromTransportMode(JSONObject responseData, Model model) {
         JSONArray tempArray = new JSONArray();
         switch (model.getAppData().getRealTimeTransportMode()) {

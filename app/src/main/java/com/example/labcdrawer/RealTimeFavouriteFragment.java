@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-
+/**
+ * Fragment for the real time favourite instance.
+ */
 public class RealTimeFavouriteFragment extends Fragment {
 
     private static final String STATION_LIST = "stationList";
