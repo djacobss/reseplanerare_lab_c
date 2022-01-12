@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -39,8 +40,10 @@ public class TripsSearchFragment extends Fragment {
     private Button searchBtn, addFavouriteBtn, searchTripsBtn;
     private String startSearchString, endSearchString, datePicked, timePicked;
     private int noOfLocationsPicked;
-    private ConstraintLayout expandableLayout;
-    private LocationItem firstLocation,endLocation;
+    private ConstraintLayout expandableLayout, searchBarLayout;
+    private LocationItem firstLocation, endLocation;
+    private boolean isExpanded;
+    private ImageView expandSearch;
 
     public TripsSearchFragment() {
 
@@ -65,6 +68,7 @@ public class TripsSearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         noOfLocationsPicked = 0;
+        isExpanded = true;
         model.setTimeChoice(TripsTimeChoice.NOW);
         View view = inflater.inflate(R.layout.fragment_trips_search, container, false);
 
@@ -79,6 +83,8 @@ public class TripsSearchFragment extends Fragment {
         expandableLayout = view.findViewById(R.id.tripsAddFavouriteTripExpandable);
         addFavouriteBtn = view.findViewById(R.id.tripsAddFavouriteButton);
         searchTripsBtn = view.findViewById(R.id.tripsActualSearchBtn);
+        expandSearch = view.findViewById(R.id.tripsSearchHideArrow);
+        searchBarLayout = view.findViewById(R.id.tripsSearchExpandableLayout);
 
         endSearchEditText.setEnabled(false);
         startSearchEditText.setEnabled(true);
@@ -130,7 +136,15 @@ public class TripsSearchFragment extends Fragment {
         searchTripsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(view.getContext(),"Ange hållplatser innan sökning", Toast.LENGTH_LONG).show();
+                Toast.makeText(view.getContext(), "Ange hållplatser innan sökning", Toast.LENGTH_LONG).show();
+            }
+        });
+        expandSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setIsExpanded(!isExpanded);
+                searchBarLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+                expandSearch.setImageResource(isExpanded ? R.drawable.ic_baseline_keyboard_arrow_up_24 : R.drawable.ic_baseline_keyboard_arrow_down_24);
             }
         });
         return view;
@@ -180,14 +194,14 @@ public class TripsSearchFragment extends Fragment {
                                 tempTripItem.setFavourite(true);
                                 boolean favouriteExists = false;
                                 for (TripItem item : model.getAppData().getFavouriteTrips()) {
-                                    if(item.getStartLocationName().equals(tempTripItem.getStartLocationName()) && item.getEndLocationName().equals(tempTripItem.getEndLocationName())){
+                                    if (item.getStartLocationName().equals(tempTripItem.getStartLocationName()) && item.getEndLocationName().equals(tempTripItem.getEndLocationName())) {
                                         favouriteExists = true;
                                     }
                                 }
-                                if(!favouriteExists) {
+                                if (!favouriteExists) {
                                     model.getAppData().getFavouriteTrips().add(tempTripItem);
                                 } else {
-                                    Toast.makeText(getView().getContext(),"Favorit finns redan", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getView().getContext(), "Favorit finns redan", Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
@@ -203,13 +217,13 @@ public class TripsSearchFragment extends Fragment {
                         searchTripsBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                if(model.getTimeChoice().equals(TripsTimeChoice.NOW)){
-                                    TripDataFetcher.getJSONTripData(firstLocation.getSiteIDString(),endLocation.getSiteIDString(),getView().getContext(),model);
-                                } else if(model.getTimeChoice().equals(TripsTimeChoice.ARRIVE_AT) || model.getTimeChoice().equals(TripsTimeChoice.TRAVEL_AT)){
-                                    if(datePicked!=null && timePicked != null){
-                                        TripDataFetcher.getJSONTripData(firstLocation.getSiteIDString(),endLocation.getSiteIDString(),getView().getContext(),model);
+                                if (model.getTimeChoice().equals(TripsTimeChoice.NOW)) {
+                                    TripDataFetcher.getJSONTripData(firstLocation.getSiteIDString(), endLocation.getSiteIDString(), getView().getContext(), model);
+                                } else if (model.getTimeChoice().equals(TripsTimeChoice.ARRIVE_AT) || model.getTimeChoice().equals(TripsTimeChoice.TRAVEL_AT)) {
+                                    if (datePicked != null && timePicked != null) {
+                                        TripDataFetcher.getJSONTripData(firstLocation.getSiteIDString(), endLocation.getSiteIDString(), getView().getContext(), model);
                                     } else {
-                                        Toast.makeText(getView().getContext(),"Ange önskad tid först",Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getView().getContext(), "Ange önskad tid först", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             }
@@ -246,6 +260,16 @@ public class TripsSearchFragment extends Fragment {
                 }
             }
         });
+        searchTripsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getView().getContext(), "Ange hållplatser innan sökning", Toast.LENGTH_LONG);
+            }
+        });
+    }
+
+    private void setIsExpanded(boolean isExpanded) {
+        this.isExpanded = isExpanded;
     }
 
     public void showDateTimeDialog() {
@@ -285,7 +309,7 @@ public class TripsSearchFragment extends Fragment {
 
     public void showTripsResults(ArrayList<TripItem> tripItems) {
         layoutManager = new LinearLayoutManager(getView().getContext());
-        adapter = new RecyclerTripsAdapter(tripItems,getView().getContext());
+        adapter = new RecyclerTripsAdapter(tripItems, getView().getContext());
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);

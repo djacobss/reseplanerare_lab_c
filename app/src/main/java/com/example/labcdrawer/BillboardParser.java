@@ -18,18 +18,8 @@ public class BillboardParser {
             try {
                 BillboardItem billboardItem = new BillboardItem();
                 JSONObject responseData = object.getJSONObject("ResponseData");
-                JSONArray jsonArray = new JSONArray();
-                if (responseData.getJSONArray("Buses").length() > 0) {
-                    jsonArray = responseData.getJSONArray("Buses");
-                } else if (responseData.getJSONArray("Metros").length() > 0) {
-                    jsonArray = responseData.getJSONArray("Metros");
-                } else if (responseData.getJSONArray("Trains").length() > 0) {
-                    jsonArray = responseData.getJSONArray("Trains");
-                } else if (responseData.getJSONArray("Trams").length() > 0) {
-                    jsonArray = responseData.getJSONArray("Trams");
-                } else if (responseData.getJSONArray("Ships").length() > 0) {
-                    jsonArray = responseData.getJSONArray("Ships");
-                }
+                RealTimeParser realTimeParser = new RealTimeParser();
+                JSONArray jsonArray = realTimeParser.setJSONArrayFromTransportMode(responseData,model);
                 if (jsonArray.length() > 0) {
                     ArrayList<BillboardSubItem> billboardSubItems = new ArrayList<>();
 
@@ -48,6 +38,19 @@ public class BillboardParser {
                                 jsonArray.getJSONObject(i).getString("DisplayTime")
                         ));
                     }
+                    billboardItem.setBillboardSubItems(billboardSubItems);
+                    billboardItems.add(billboardItem);
+                } else {
+                    ArrayList<BillboardSubItem> billboardSubItems = new ArrayList<>();
+
+                    for (LocationItem item : model.getAppData().getFavouriteStations()) {
+                        if(item.getSiteID() == siteIDList.get(index)){
+                            billboardItem.setStationName(item.getPlaceName());
+                        }
+                    }
+
+                    billboardItem.setNextLineNumber("-");
+                    billboardItem.setNextDisplayTime("Inga avgångar");
                     billboardItem.setBillboardSubItems(billboardSubItems);
                     billboardItems.add(billboardItem);
                 }

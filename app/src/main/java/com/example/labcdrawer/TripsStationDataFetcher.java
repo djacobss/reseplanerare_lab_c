@@ -17,8 +17,8 @@ public class TripsStationDataFetcher {
                     model.stationTripSearchDataReceived(response);
                 },
                 error -> {
-                    model.timeOutErrorMsg();
                     error.printStackTrace();
+                    model.timeOutErrorMsg();
                 });
         jsonObjectRequest.setShouldCache(false);
         Volley.newRequestQueue(context).add(jsonObjectRequest);

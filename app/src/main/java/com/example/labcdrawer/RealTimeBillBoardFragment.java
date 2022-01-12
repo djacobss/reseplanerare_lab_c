@@ -58,7 +58,9 @@ public class RealTimeBillBoardFragment extends Fragment {
         model.setBillBoardFragment(this);
         recyclerView = view.findViewById(R.id.realTimeBillboardRecyclerView);
         layoutManager = new LinearLayoutManager(view.getContext());
-        BillboardDataFetcher.getBillboardJSONData(model.getFavouriteStationStrings(),view.getContext(),model);
+        if (!model.getAppData().getFavouriteStations().isEmpty()) {
+            BillboardDataFetcher.getBillboardJSONData(model.getAppData().getFavouriteStations().get(0).getSiteIDString(), view.getContext(), model);
+        }
         return view;
     }
 
@@ -66,7 +68,7 @@ public class RealTimeBillBoardFragment extends Fragment {
         this.model = model;
     }
 
-    public void showResults(ArrayList<BillboardItem> billboardItems){
+    public void showResults(ArrayList<BillboardItem> billboardItems) {
         adapter = new RecyclerBillboardAdapter(billboardItems, getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -74,15 +76,40 @@ public class RealTimeBillBoardFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.billboard_refresh_menu,menu);
+        inflater.inflate(R.menu.transport_mode_realtime_item, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.billboardOptionsItemRefresh){
-            BillboardDataFetcher.getBillboardJSONData(model.getFavouriteStationStrings(),getView().getContext(),model);
+        if (!model.getAppData().getFavouriteStations().isEmpty()) {
+            switch (item.getItemId()) {
+                case R.id.realTimeUpdateItem:
+                    BillboardDataFetcher.getBillboardJSONData(model.getAppData().getFavouriteStations().get(0).getSiteIDString(), getView().getContext(), model);
+                    break;
+                case R.id.transportModeBusItem:
+                    model.getAppData().setRealTimeTransportMode(TransportMode.BUS);
+                    BillboardDataFetcher.getBillboardJSONData(model.getAppData().getFavouriteStations().get(0).getSiteIDString(), getView().getContext(), model);
+                    break;
+                case R.id.transportModeMetroItem:
+                    model.getAppData().setRealTimeTransportMode(TransportMode.METRO);
+                    BillboardDataFetcher.getBillboardJSONData(model.getAppData().getFavouriteStations().get(0).getSiteIDString(), getView().getContext(), model);
+                    break;
+                case R.id.transportModeTrainItem:
+                    model.getAppData().setRealTimeTransportMode(TransportMode.TRAIN);
+                    BillboardDataFetcher.getBillboardJSONData(model.getAppData().getFavouriteStations().get(0).getSiteIDString(), getView().getContext(), model);
+                    break;
+                case R.id.transportModeTramItem:
+                    model.getAppData().setRealTimeTransportMode(TransportMode.TRAM);
+                    BillboardDataFetcher.getBillboardJSONData(model.getAppData().getFavouriteStations().get(0).getSiteIDString(), getView().getContext(), model);
+                    break;
+                case R.id.transportModeShipItem:
+                    model.getAppData().setRealTimeTransportMode(TransportMode.SHIP);
+                    BillboardDataFetcher.getBillboardJSONData(model.getAppData().getFavouriteStations().get(0).getSiteIDString(), getView().getContext(), model);
+                    break;
+            }
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

@@ -23,8 +23,8 @@ public class TripDataFetcher {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> model.tripsDataReceived(response),
                 error -> {
-                    //TODO ERROR
                     error.printStackTrace();
+                    model.timeOutErrorMsg();
                 });
         jsonObjectRequest.setShouldCache(false);
         Volley.newRequestQueue(context).add(jsonObjectRequest);
@@ -40,8 +40,8 @@ public class TripDataFetcher {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> model.tripsDataReceived(response),
                 error -> {
-                    //TODO ERROR
                     error.printStackTrace();
+                    model.timeOutErrorMsg();
                 });
         jsonObjectRequest.setShouldCache(false);
         Volley.newRequestQueue(context).add(jsonObjectRequest);

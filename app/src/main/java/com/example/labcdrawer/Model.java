@@ -1,5 +1,6 @@
 package com.example.labcdrawer;
 
+import android.content.Context;
 import android.util.Log;
 
 import org.json.JSONObject;
@@ -166,16 +167,22 @@ public class Model {
         this.billBoardFragment = billBoardFragment;
     }
 
-    public void waitForResponses(JSONObject object, int size, int siteID) {
+    public void waitForResponses(JSONObject object, int siteID, Context context) {
         billboardObjectContainer.add(object);
         billboardSiteIDContainer.add(siteID);
-        if (billboardObjectContainer.size() == size) {
+        if(billboardObjectContainer.size() < appData.getFavouriteStations().size()) {
+            BillboardDataFetcher.getBillboardJSONData(appData.getFavouriteStations().get(billboardObjectContainer.size()).getSiteIDString(),context,this);
+        } else if (billboardObjectContainer.size() >= appData.getFavouriteStations().size()) {
             billboardDataReceived(billboardObjectContainer, billboardSiteIDContainer);
         }
     }
 
     public void timeOutErrorMsg() {
         mainActivity.showTimeoutToast();
+    }
+
+    public void timeOutInStationActivity(){
+        stationRealTimeActivity.showTimeout();
     }
 
     public void saveFromStationActivity() {

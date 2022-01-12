@@ -1,6 +1,7 @@
 package com.example.labcdrawer;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -17,8 +18,8 @@ public class RealTimeDataFetcher {
                     model.realTimeDataReceived(response);
                 },
                 error -> {
-                    model.timeOutErrorMsg();
                     error.printStackTrace();
+                    model.timeOutInStationActivity();
                 });
         jsonObjectRequest.setShouldCache(false);
         Volley.newRequestQueue(context).add(jsonObjectRequest);

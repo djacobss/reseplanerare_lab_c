@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,16 +38,14 @@ public class StationRealTimeActivity extends AppCompatActivity {
 
 
         model = new Model();
-        if (savedInstanceState == null && (LocationItem) getIntent().getSerializableExtra("Item") != null) {
+        if ((LocationItem) getIntent().getSerializableExtra("Item") != null) {
             currentItem = (LocationItem) getIntent().getSerializableExtra("Item");
             appData = (AppData) getIntent().getSerializableExtra("AppData");
             returnToFragment = (ReturnToFragment) getIntent().getSerializableExtra("Fragment");
             model.setAppData(appData);
             model.setStationRealTimeActivity(this);
         } else {
-            if(!model.loadFromStationActivity()) {
-                model.setAppData(new AppData());
-            }
+            appData = new AppData();
             returnToFragment = ReturnToFragment.REALTIME_SEARCH;
         }
         lastUpdated = findViewById(R.id.realTimeStationLastUpdatedText);
@@ -127,5 +126,9 @@ public class StationRealTimeActivity extends AppCompatActivity {
     protected void onPause() {
         model.saveFromStationActivity();
         super.onPause();
+    }
+
+    public void showTimeout() {
+        Toast.makeText(this,"Timeout Error", Toast.LENGTH_LONG).show();
     }
 }
